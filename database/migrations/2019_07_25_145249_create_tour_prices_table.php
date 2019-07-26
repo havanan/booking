@@ -15,14 +15,14 @@ class CreateTourPricesTable extends Migration
     {
         Schema::create('tour_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tour_id');
-            $table->float('price',9,3);
-            $table->float('discount',9,3);
-            $table->float('children',9,3);
-            $table->float('baby',9,3);
-            $table->date('expired_date');
-            $table->integer('status');
-            $table->text('note');
+            $table->integer('tour_id')->nullable();
+            $table->float('price',9,3)->nullable();
+            $table->float('discount',9,3)->nullable();
+            $table->float('children',9,3)->nullable();
+            $table->float('baby',9,3)->nullable();
+            $table->date('expired_date')->nullable();
+            $table->integer('status')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

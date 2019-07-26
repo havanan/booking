@@ -15,12 +15,12 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('icon');
-            $table->string('note');
-            $table->float('price',9,3);
-            $table->float('discount',9,3);
-            $table->integer('status');
+            $table->string('name')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('note')->nullable();
+            $table->float('price',9,3)->nullable();
+            $table->float('discount',9,3)->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

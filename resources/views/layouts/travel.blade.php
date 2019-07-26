@@ -12,20 +12,20 @@
     <link rel="shortcut icon" href="http://qbgrow.com/favicon.ico" type="image/x-icon">
     <link rel="icon" href="http://qbgrow.com/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/bootstrap.4.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/font-awesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/animate.css/animate.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/owl-carousel/assets/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/owl-carousel/assets/owl.theme.default.min.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/flag-icon-css/css/flag-icon.min.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/flaticon/flaticon.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/hover-effects/effects.min.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/ion.rangeslider/css/ion.rangeSlider.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/ion.rangeslider/css/ion.rangeSlider.skinFlat.css"/>
-    <link rel="stylesheet" href="{{asset('/')}}/assets/vendors/icheck/skins/square/aero.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/bootstrap.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/animate.css/animate.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/owl-carousel/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/owl-carousel/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/flag-icon-css/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/flaticon/flaticon.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/hover-effects/effects.min.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/ion.rangeslider/css/ion.rangeSlider.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/ion.rangeslider/css/ion.rangeSlider.skinFlat.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/vendors/icheck/skins/square/aero.css"/>
 
     <!-- :::::-[ Travelgo - Travel and Tours listings HTML template StyleSheet ]-:::::: -->
-    <link rel="stylesheet" href="{{asset('/')}}/assets/css/style.css"/>
+    <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css"/>
     @yield('css')
 </head>
 <body>
@@ -231,19 +231,19 @@
         @include('layouts.components.footer')
     <!-- ::::::-[ END-OF PAGE FOOTER ]-:::::: -->
     <!-- ::::::-[ Load Javascript Vendors ]-:::::: -->
-    <script src="{{asset('/')}}/assets/vendors/jquery/jquery.3.3.1.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/popper.js/popperjs.min.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/bootstrap.4.1/js/bootstrap.min.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/parallax/parallax-scroll.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/sticky/jquery.sticky-sidebar.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/sticky-kit/sticky-kit.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/ion.rangeslider/js/ion.rangeSlider.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/icheck/icheck.min.js"></script>
-    <script src="{{asset('/')}}/assets/vendors/countdown/jquery.countdown.min.js"></script>
+    <script src="{{asset('/')}}assets/vendors/jquery/jquery.3.3.1.js"></script>
+    <script src="{{asset('/')}}assets/vendors/popper.js/popperjs.min.js"></script>
+    <script src="{{asset('/')}}assets/vendors/bootstrap.4.1/js/bootstrap.min.js"></script>
+    <script src="{{asset('/')}}assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="{{asset('/')}}assets/vendors/parallax/parallax-scroll.js"></script>
+    <script src="{{asset('/')}}assets/vendors/sticky/jquery.sticky-sidebar.js"></script>
+    <script src="{{asset('/')}}assets/vendors/sticky-kit/sticky-kit.js"></script>
+    <script src="{{asset('/')}}assets/vendors/ion.rangeslider/js/ion.rangeSlider.js"></script>
+    <script src="{{asset('/')}}assets/vendors/icheck/icheck.min.js"></script>
+    <script src="{{asset('/')}}assets/vendors/countdown/jquery.countdown.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <!-- ::::::-[ Travelgo - Travel and Tours listings HTML template Javascript ]-::::::   -->
-    <script src="{{asset('/')}}/assets/js/main.js"></script>
+    <script src="{{asset('/')}}assets/js/main.js"></script>
     @yield('js')
 </body>
 </html>

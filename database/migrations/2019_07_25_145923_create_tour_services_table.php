@@ -15,6 +15,9 @@ class CreateTourServicesTable extends Migration
     {
         Schema::create('tour_services', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('tour_id')->nullable();
+            $table->integer('service_id')->nullable();
+
             $table->timestamps();
         });
     }

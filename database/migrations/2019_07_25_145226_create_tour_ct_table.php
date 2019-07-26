@@ -15,8 +15,8 @@ class CreateTourCtTable extends Migration
     {
         Schema::create('tour_ct', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tour_id');
-            $table->integer('tour_category_id');
+            $table->integer('tour_id')->nullable();
+            $table->integer('tour_category_id')->nullable();
             $table->timestamps();
         });
     }

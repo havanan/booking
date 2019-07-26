@@ -15,8 +15,8 @@ class CreateTourCategoriesTable extends Migration
     {
         Schema::create('tour_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('status');
+            $table->string('name')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
