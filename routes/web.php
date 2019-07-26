@@ -94,4 +94,7 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
     Route::prefix('users')->group(function () {
         Route::get('/', 'UsersController@index')->name('admin.user.index');
     });
+    Route::prefix('prices')->group(function () {
+        Route::get('/', 'PricesController@index')->name('admin.price.index');
+    });
 });

@@ -14,7 +14,8 @@ class TourCategoriesController extends Controller
      */
     public function index()
     {
-        //
+
+       return view('admin.tour_categories.index');
     }
 
     /**
