@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
+        $data = Service::all();
+        return view('admin.services.index',compact('data'));
+
     }
 
     /**
@@ -35,7 +38,17 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->only('name','icon','note','price','discount','status');
+        $creat = Service::create($input);
+        if ($creat){
+            $status = 'success';
+            $message = 'Tạo thành công';
+
+        }else{
+            $status = 'error';
+            $message = 'Tạo thất bại';
+        }
+        return back()->with($status,$message);
     }
 
     /**

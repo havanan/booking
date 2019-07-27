@@ -1,13 +1,9 @@
 @extends('layouts.admin')
-@section('title') Tours Categories @endsection
-@section('breadcrumb') Tours categories @endsection
+@section('title') Dịch Vụ Đi Kèm @endsection
+@section('breadcrumb') Dịch vụ @endsection
 @section('js')
-    <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
-    <script>
-        $('#example23').DataTable({
-
-        });
-    </script>
+    <script src="{{asset('admin/assets/node_modules/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/data-table-init.js')}}"></script>
 @endsection
 @section('content')
     {{isset($status) ? $status : ''}}
@@ -22,12 +18,14 @@
                     </div>
                    @include('layouts.components.notification')
                    <div class="table-responsive m-t-40">
-                       <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                       <table id="table-data" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                            <tr>
                                <th class="text-center">Stt</th>
-                               <th class="text-center">Mã loại tour</th>
-                               <th>Tên</th>
+                               <th class="text-center">Mã dịch vụ</th>
+                               <th class="text-center">Icon</th>
+                               <th class="text-center">Tên dịch vụ</th>
+                               <th class="text-center">Giá tiền</th>
                                <th class="text-center">Trạng thái</th>
                                <th class="text-center">Ngày tạo</th>
                                <th class="text-center">Tác vụ</th>
@@ -39,7 +37,13 @@
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
                                        <td class="text-center">{{$item->id}}</td>
+                                       <td class="text-center">{{$item->icon}}</td>
                                        <td><strong>{{$item->name}}</strong></td>
+                                       <td class="text-center">
+                                           <del>{{number_format($item->price)}}</del>
+                                           <br>
+                                           {{number_format($item->discount)}}
+                                       </td>
                                        <td class="text-center">
                                            @if($item->status == 1)
                                                <h4>
@@ -68,5 +72,5 @@
            </div>
        </div>
     </div>
-@include('admin.tour_categories.small_model',['title' => 'Tạo Loại Tour','url' => route('admin.tour_categories.store')])
+@include('admin.tour_categories.small_model')
 @endsection

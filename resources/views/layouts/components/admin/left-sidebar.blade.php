@@ -24,6 +24,8 @@
                         </ul>
                     </li>
                     <li> <a class="waves-effect waves-dark" href="{{route('admin.service.index')}}" aria-expanded="false"><i class=" icon-calculator"></i><span class="hide-menu">Dịch vụ đi kèm</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{route('admin.icon')}}" aria-expanded="false"><i class="ti-light-bulb"></i><span class="hide-menu">Icon</span></a></li>
+
                 <li class="nav-small-cap"></li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-user"></i><span class="hide-menu">Nhân viên</span></a>
                         <ul aria-expanded="false" class="collapse">

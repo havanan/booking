@@ -54,6 +54,7 @@ Auth::routes();
 
 Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('dashboard', 'DashboardController@index')->name('admin.index');
+    Route::get('icon', 'DashboardController@icon')->name('admin.icon');
 
     Route::prefix('bookings')->group(function () {
         Route::get('/', 'BookingsController@index')->name('admin.booking.index');
@@ -81,6 +82,9 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('services')->group(function () {
         Route::get('/', 'ServicesController@index')->name('admin.service.index');
+        Route::post('store', 'ServicesController@store')->name('admin.service.store');
+        Route::post('update/{id}', 'ServicesController@update')->name('admin.service.update');
+        Route::get('destroy/{id}', 'ServicesController@destroy')->name('admin.service.destroy');
     });
 
     Route::prefix('tours')->group(function () {
@@ -89,6 +93,9 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('tour-categories')->group(function () {
         Route::get('/', 'TourCategoriesController@index')->name('admin.tour_categories.index');
+        Route::post('store', 'TourCategoriesController@store')->name('admin.tour_categories.store');
+        Route::post('update/{id}', 'TourCategoriesController@update')->name('admin.tour_categories.update');
+        Route::get('destroy/{id}', 'TourCategoriesController@destroy')->name('admin.tour_categories.destroy');
     });
 
     Route::prefix('users')->group(function () {

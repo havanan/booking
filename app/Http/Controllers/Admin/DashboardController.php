@@ -82,4 +82,8 @@ class DashboardController extends Controller
     {
         //
     }
+    public function icon()
+    {
+        return view('admin.dashboard.icon');
+    }
 }

@@ -2,9 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89ec7bf7-dfc6-44c8-992c-6cd4831cedc1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/tour_categories/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/data-table-init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/dashboard/icon.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/services/delete_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/services/edit_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/services/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/services/small_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/tour_categories/delete_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/tour_categories/edit_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/tour_categories/small_model.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/components/notification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ServicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ServicesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TourCategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TourCategoriesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Service.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Service.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/TourCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/TourCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/dist/css/pages/icon-page.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/dist/css/pages/icon-page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/dist/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/dist/css/style.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/tour_categories/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/tour_categories/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/components/admin/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/components/admin/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/components/admin/left-sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/components/admin/left-sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -25,6 +43,7 @@
       <list>
         <option value="blace" />
         <option value="blade" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -125,15 +144,20 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/dashboard" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\booking\resources\views\admin\tour_categories" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\booking\resources\views\admin\dashboard" />
+      <recent name="C:\xampp\htdocs\booking\resources\views\admin" />
+      <recent name="C:\xampp\htdocs\booking\resources\views\admin\tour_categories" />
       <recent name="$PROJECT_DIR$/resources/views/auth" />
       <recent name="$PROJECT_DIR$/resources/views/layouts" />
-      <recent name="F:\xampp\htdocs\booking\resources\views\layouts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -172,6 +196,7 @@
       <workItem from="1564124380742" duration="280000" />
       <workItem from="1564125110633" duration="610000" />
       <workItem from="1564161870620" duration="3818000" />
+      <workItem from="1564195028566" duration="15649000" />
     </task>
     <servers />
   </component>
@@ -183,7 +208,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

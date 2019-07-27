@@ -1,12 +1,12 @@
 <!-- sample modal content -->
-<div id="responsive-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div id="edit-modal-{{$data['id']}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{$title ? $title : ''}}</h4>
+                <h4 class="modal-title">Sửa Loại Tour</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form method="post" action="{{$url ? $url : ''}}">
+            <form method="post" action="{{route('admin.tour_categories.update',$data['id'])}}">
             <div class="modal-body">
                     @csrf
                     <div class="form-group">
@@ -20,11 +20,11 @@
                         <label for="message-text" class="control-label">Trạng thái:</label>
                         <div class="row" style="padding: 10px">
                             <div class="custom-control custom-radio col-md-6">
-                                <input type="radio" id="show" name="status" class="custom-control-input" value="1" checked>
+                                <input type="radio" id="show" name="status" class="custom-control-input" value="1" {{isset($data['status']) && $data['status'] == 1 ? 'checked' : ''}} >
                                 <label class="custom-control-label" for="show">Hiện thị</label>
                             </div>
                             <div class="custom-control custom-radio col-md-6">
-                                <input type="radio" id="hidden" name="status" class="custom-control-input" value="0">
+                                <input type="radio" id="hidden" name="status" class="custom-control-input" value="0" {{isset($data['status']) && $data['status'] == 0 ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="hidden">Ẩn</label>
                             </div>
                         </div>
