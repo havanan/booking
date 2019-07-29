@@ -19,17 +19,6 @@ class ServicesController extends Controller
         return view('admin.services.index',compact('data'));
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,28 +41,6 @@ class ServicesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,7 +49,32 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->only('name','icon','note','price','discount','status');
+        $info = Service::find($id);
+        if (isset($info['id'])){
+            $info->name = $input['name'];
+            $info->icon = $input['icon'];
+            $info->price = $input['price'];
+            $info->discount = $input['discount'];
+            $info->status = $input['status'];
+            $info->note = $input['note'];
+
+            if ($info->save()){
+                $status = 'success';
+                $message = 'Sửa thành công';
+            }else{
+                $status = 'error';
+                $message = 'Sửa thất bại';
+            }
+
+        }else{
+            $status = 'error';
+            $message = 'Không có thông tin';
+        }
+
+
+        return back()->with($status,$message);
+
     }
 
     /**
@@ -93,6 +85,23 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $info = Service::find($id);
+        if (isset($info['id'])){
+
+            if ($info->delete()){
+                $status = 'success';
+                $message = 'Xóa thành công';
+            }else{
+                $status = 'error';
+                $message = 'Xóa thất bại';
+            }
+
+        }else{
+            $status = 'error';
+            $message = 'Không có thông tin';
+        }
+
+
+        return back()->with($status,$message);
     }
 }

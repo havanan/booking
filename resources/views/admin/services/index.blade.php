@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('title') Dịch Vụ Đi Kèm @endsection
 @section('breadcrumb') Dịch vụ @endsection
+@section('css')
+    <link href="{{asset('admin/dist/css/pages/icon-page.css')}}" rel="stylesheet">
+@endsection
 @section('js')
     <script src="{{asset('admin/assets/node_modules/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>
@@ -24,7 +27,7 @@
                                <th class="text-center">Stt</th>
                                <th class="text-center">Mã dịch vụ</th>
                                <th class="text-center">Icon</th>
-                               <th class="text-center">Tên dịch vụ</th>
+                               <th>Tên dịch vụ</th>
                                <th class="text-center">Giá tiền</th>
                                <th class="text-center">Trạng thái</th>
                                <th class="text-center">Ngày tạo</th>
@@ -36,13 +39,15 @@
                                @foreach($data as $key => $item)
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
-                                       <td class="text-center">{{$item->id}}</td>
-                                       <td class="text-center">{{$item->icon}}</td>
+                                       <td class="text-center">DV-{{$item->id}}</td>
+                                       <td class="text-center">
+                                           <i class="{{$item->icon}}"></i>
+                                       </td>
                                        <td><strong>{{$item->name}}</strong></td>
                                        <td class="text-center">
-                                           <del>{{number_format($item->price)}}</del>
+                                           <del>{{number_format($item->price)}}</del> vnđ
                                            <br>
-                                           {{number_format($item->discount)}}
+                                           {{number_format($item->discount)}} vnđ
                                        </td>
                                        <td class="text-center">
                                            @if($item->status == 1)
@@ -59,9 +64,9 @@
                                        <td class="text-center">
                                            <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal-{{$item->id}}"><i class="icon-pencil"></i></button>
                                            <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
-                                           @include('admin.tour_categories.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           @include('admin.services.delete_model',['title' =>$item->name,'id' => $item->id])
                                        </td>
-                                       @include('admin.tour_categories.edit_model',['title' =>$item->name,'data' => $item])
+                                       @include('admin.services.edit_model',['title' =>$item->name,'data' => $item])
                                    </tr>
                                @endforeach
                            @endif
@@ -72,5 +77,5 @@
            </div>
        </div>
     </div>
-@include('admin.tour_categories.small_model')
+@include('admin.services.create_model')
 @endsection

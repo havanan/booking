@@ -16,16 +16,18 @@
                             <input type="hidden" class="form-control" name="id" value="{{$data['id'] }}">
                         @endif
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">Trạng thái:</label>
-                        <div class="row" style="padding: 10px">
-                            <div class="custom-control custom-radio col-md-6">
-                                <input type="radio" id="show" name="status" class="custom-control-input" value="1" {{isset($data['status']) && $data['status'] == 1 ? 'checked' : ''}} >
-                                <label class="custom-control-label" for="show">Hiện thị</label>
+                    <div class="form-group row">
+                        <label class="control-label text-left col-md-12">Trạng thái:</label>
+                        <div class="col-md-6">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="chk-show-{{$data['id']}}" name="status" class="custom-control-input" value="1" {{isset($data['status']) && $data['status'] == 1 ? 'checked' : ''}}>
+                                <label class="custom-control-label" for="chk-show-{{$data['id']}}">Hiện thị</label>
                             </div>
-                            <div class="custom-control custom-radio col-md-6">
-                                <input type="radio" id="hidden" name="status" class="custom-control-input" value="0" {{isset($data['status']) && $data['status'] == 0 ? 'checked' : ''}}>
-                                <label class="custom-control-label" for="hidden">Ẩn</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="chk-hidden-{{$data['id']}}" name="status" class="custom-control-input" value="0" {{isset($data['status']) && $data['status'] == 0 ? 'checked' : ''}}>
+                                <label class="custom-control-label" for="chk-hidden-{{$data['id']}}">Ẩn</label>
                             </div>
                         </div>
                     </div>

@@ -3,30 +3,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Sửa Loại Tour</h4>
+                <h4 class="modal-title">Sửa Loại Bài Viết</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form method="post" action="{{route('admin.service.update',$data['id'])}}">
+            <form method="post" action="{{route('admin.categories.update',$data['id'])}}">
             <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">Icon:</label>
-                        <input type="text" class="form-control" required name="icon" value="{{isset($data['icon']) ? $data['icon'] : ''}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Tên dịch vụ:</label>
+                        <label for="recipient-name" class="control-label">Tên:</label>
                         <input type="text" class="form-control" required name="name" value="{{isset($data['name']) ? $data['name'] : ''}}">
                         @if(isset($data['id']))
                             <input type="hidden" class="form-control" name="id" value="{{$data['id'] }}">
                         @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Giá :</label>
-                        <input type="number" class="form-control" required name="price" value="{{isset($data['price']) ? $data['price'] : 0}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Giá khuyến mại:</label>
-                        <input type="number" class="form-control" required name="discount" value="{{isset($data['discount']) ? $data['discount'] : 0}}">
                     </div>
                     <div class="form-group row">
                         <label class="control-label text-left col-md-12">Trạng thái:</label>
@@ -42,12 +30,6 @@
                                 <label class="custom-control-label" for="chk-hidden-{{$data['id']}}">Ẩn</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Ghi chú:</label>
-                        <textarea class="form-control" name="note">
-                                {{$data['note']}}
-                        </textarea>
                     </div>
             </div>
             <div class="modal-footer">

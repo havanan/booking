@@ -1,10 +1,9 @@
 @extends('layouts.admin')
-@section('title') Tours Categories @endsection
-@section('breadcrumb') Tours categories @endsection
+@section('title') Loại Bài Viết @endsection
+@section('breadcrumb') Loại bài viết @endsection
 @section('js')
     <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>
-
 @endsection
 @section('content')
     <div class="row">
@@ -22,7 +21,7 @@
                            <thead>
                            <tr>
                                <th class="text-center">Stt</th>
-                               <th class="text-center">Mã loại tour</th>
+                               <th class="text-center">Mã loại bài viết</th>
                                <th>Tên</th>
                                <th class="text-center">Trạng thái</th>
                                <th class="text-center">Ngày tạo</th>
@@ -34,7 +33,7 @@
                                @foreach($data as $key => $item)
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
-                                       <td class="text-center">TC-{{$item->id}}</td>
+                                       <td class="text-center">Ct-{{$item->id}}</td>
                                        <td><strong>{{$item->name}}</strong></td>
                                        <td class="text-center">
                                            @if($item->status == 1)
@@ -51,9 +50,9 @@
                                        <td class="text-center">
                                            <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal-{{$item->id}}"><i class="icon-pencil"></i></button>
                                            <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
-                                           @include('admin.tour_categories.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           @include('admin.categories.delete_model',['title' =>$item->name,'id' => $item->id])
                                        </td>
-                                       @include('admin.tour_categories.edit_model',['title' =>$item->name,'data' => $item])
+                                       @include('admin.categories.edit_model',['title' =>$item->name,'data' => $item])
                                    </tr>
                                @endforeach
                            @endif
@@ -64,5 +63,5 @@
            </div>
        </div>
     </div>
-@include('admin.tour_categories.create_model',['title' => 'Tạo Loại Tour','url' => route('admin.tour_categories.store')])
+@include('admin.categories.create_model')
 @endsection
