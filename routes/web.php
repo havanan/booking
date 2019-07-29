@@ -118,6 +118,8 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
         Route::post('store', 'UsersController@store')->name('admin.user.store');
         Route::post('update/{id}', 'UsersController@update')->name('admin.user.update');
         Route::get('destroy/{id}', 'UsersController@destroy')->name('admin.user.destroy');
+        Route::get('my-profile', 'UsersController@myProfile')->name('admin.user.my_profile');
+
     });
     Route::prefix('prices')->group(function () {
         Route::get('/', 'PricesController@index')->name('admin.price.index');

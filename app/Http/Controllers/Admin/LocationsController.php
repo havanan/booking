@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,17 +15,9 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $data = Location::all();
+        return view('admin.locations.index',compact('data'));
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -35,30 +28,19 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->only('name','status','location');
+        $creat = Location::create($input);
+        if ($creat){
+            $status = 'success';
+            $message = 'Tạo thành công';
+
+        }else{
+            $status = 'error';
+            $message = 'Tạo thất bại';
+        }
+        return back()->with($status,$message);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +51,28 @@ class LocationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->only('name','location','status');
+        $info = Location::find($id);
+        if (isset($info['id'])){
+            $info->name = $input['name'];
+            $info->parent_id = isset($input['location']) ? $input['location'] : null;
+            $info->status = $input['status'];
+
+            if ($info->save()){
+                $status = 'success';
+                $message = 'Sửa thành công';
+            }else{
+                $status = 'error';
+                $message = 'Sửa thất bại';
+            }
+
+        }else{
+            $status = 'error';
+            $message = 'Không có thông tin';
+        }
+
+
+        return back()->with($status,$message);
     }
 
     /**
@@ -80,6 +83,22 @@ class LocationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $info = Location::find($id);
+        if (isset($info['id'])){
+
+            if ($info->delete()){
+                $status = 'success';
+                $message = 'Xóa thành công';
+            }else{
+                $status = 'error';
+                $message = 'Xóa thất bại';
+            }
+
+        }else{
+            $status = 'error';
+            $message = 'Không có thông tin';
+        }
+
+        return back()->with($status,$message);
     }
 }
