@@ -53,6 +53,7 @@ Route::namespace('Frontend')->group(function () {
 Auth::routes();
 
 Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('tiendo', 'DashboardController@tiendo')->name('admin.tiendo');
     Route::get('dashboard', 'DashboardController@index')->name('admin.index');
     Route::get('icon', 'DashboardController@icon')->name('admin.icon');
 

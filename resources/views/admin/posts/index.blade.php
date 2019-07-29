@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title') Địa Diểm Du Lịch @endsection
-@section('breadcrumb') Địa điểm du lịch @endsection
+@section('title') Danh Sách Bài Viết @endsection
+@section('breadcrumb') Danh sách bài viết @endsection
 @section('js')
     <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>

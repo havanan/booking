@@ -86,4 +86,8 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard.icon');
     }
+    public function tiendo()
+    {
+        return view('admin.dashboard.tiendo');
+    }
 }

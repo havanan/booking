@@ -49,6 +49,8 @@
                             <li><a href="{{route('admin.post.index')}}">Theo địa điểm</a></li>
                         </ul>
                     </li>
+                <li class="nav-small-cap"></li>
+                <li> <a class="waves-effect waves-dark" href="{{route('admin.tiendo')}}" aria-expanded="false"><i class="ti-target"></i><span class="hide-menu">Tiến độ job</span></a></li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
