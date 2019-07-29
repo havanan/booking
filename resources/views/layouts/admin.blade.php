@@ -20,12 +20,12 @@
     <!--c3 plugins CSS -->
     <link href="{{asset('/admin')}}/assets/node_modules/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+    @yield('css')
     <link href="{{asset('/admin')}}/dist/css/style.min.css" rel="stylesheet">
     <!-- Dashboard 1 Page CSS -->
     <link href="{{asset('/admin')}}/dist/css/pages/dashboard1.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-    @yield('css')
 </head>
 <body class="skin-blue fixed-layout lock-nav">
     <!-- ============================================================== -->

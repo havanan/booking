@@ -4,20 +4,20 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{route('admin.index')}}">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="../admin/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                    <img src="{{asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
-                    <img src="../admin/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                    <img src="{{asset('admin/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                              <!-- dark Logo text -->
-                             <img src="../admin/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                             <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
                     <!-- Light Logo text -->
-                             <img src="../admin/assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                             <img src="{{asset('admin/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /></span> </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -89,17 +89,17 @@
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{Auth::user()->avatar ? Auth::user()->avatar : '../admin/assets/images/users/1.jpg'}}" alt="user" class="img-circle" width="30"></a>
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('admin/assets/images/users/1.jpg')}}" alt="user" class="img-circle" width="30"></a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                         <span class="with-arrow"><span class="bg-primary"></span></span>
                         <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
-                            <div class=""><img src="{{Auth::user()->avatar ? Auth::user()->avatar : '../admin/assets/images/users/1.jpg'}}" alt="user" class="img-circle" width="60"></div>
+                            <div class=""><img src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('admin/assets/images/users/1.jpg')}}" alt="user" class="img-circle" width="60"></div>
                             <div class="m-l-10">
                                 <h4 class="m-b-0"> {{ Auth::user()->username }}</h4>
                                 <p class=" m-b-0"><a href="http://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67110615120927000a060e0b4904080a"> {{ Auth::user()->email }}</a></p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="{{route('admin.user.my_profile'}}"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                        <a class="dropdown-item" href="{{route('admin.user.my_profile')}}"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                               document.getElementById('logout-form').submit();">

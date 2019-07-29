@@ -45,9 +45,13 @@
                                        </td>
                                        <td><strong>{{$item->name}}</strong></td>
                                        <td class="text-center">
-                                           <del>{{number_format($item->price)}}</del> vnđ
-                                           <br>
-                                           {{number_format($item->discount)}} vnđ
+                                           @if($item->price == 0 && $item->discount == 0)
+                                               Miễn phí
+                                           @else
+                                               <del>{{number_format($item->price)}}</del> vnđ
+                                               <br>
+                                               {{number_format($item->discount)}} vnđ
+                                           @endif
                                        </td>
                                        <td class="text-center">
                                            @if($item->status == 1)

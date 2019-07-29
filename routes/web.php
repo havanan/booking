@@ -83,6 +83,7 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('posts')->group(function () {
         Route::get('/', 'PostsController@index')->name('admin.post.index');
+        Route::get('create', 'PostsController@create')->name('admin.post.create');
         Route::post('store', 'PostsController@store')->name('admin.post.store');
         Route::post('update/{id}', 'PostsController@update')->name('admin.post.update');
         Route::get('destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
