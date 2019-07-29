@@ -62,3 +62,22 @@ Icon list material icon
 ******************/
 .material-icon-list-demo .mdi {
   font-size: 21px; }
+.ti-bus{
+    background-image: url("../../img/icon_bus.png");
+    width: 23px;
+    height: 12px;
+    background-repeat: no-repeat;
+}
+.ti-meal{
+    background-image: url("../../img/icon_meal.png");
+    width: 23px;
+    height: 20px;
+    background-repeat: no-repeat;
+}
+.ti-ticket{
+    background-image: url("../../img/icon_ticket.png");
+    width: 16px;
+    height: 26px;
+    background-repeat: no-repeat;
+}
+
