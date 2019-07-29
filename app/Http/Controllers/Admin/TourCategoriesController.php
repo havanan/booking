@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\TourCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class TourCategoriesController extends Controller
 {
@@ -38,6 +39,7 @@ class TourCategoriesController extends Controller
     public function store(Request $request)
     {
         $input = $request->only('name','status');
+        $input['slug'] = Str::slug($input['name']);
         $creat = TourCategory::create($input);
         if ($creat){
             $status = 'success';
@@ -60,10 +62,13 @@ class TourCategoriesController extends Controller
     public function update(Request $request,$id)
     {
         $input = $request->only('name','status');
+        $input['slug'] = Str::slug($input['name']);
+
         $info = TourCategory::find($id);
         if($info){
             $info->name = $request->name;
             $info->status = $request->status;
+            $info->slug = $input['slug'];
             if ($info->save()){
                 $status = 'success';
                 $message = 'Sửa thành công';

@@ -38,3 +38,15 @@
   text-align: left;
   left: 25px;
   right: 25px; }
+.file-upload{
+  display: none;
+}
+.content-body img{
+  width: 100%;
+}
+#holder{
+  margin-top:15px;max-height:150px; margin-bottom: 15px
+}
+.avatar-post{
+  width: 100%;
+}

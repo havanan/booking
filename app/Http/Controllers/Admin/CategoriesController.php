@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
@@ -28,6 +29,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $input = $request->only('name','status');
+        $input['slug'] = Str::slug($input['name']);
         $creat = Category::create($input);
         if ($creat){
             $status = 'success';
@@ -51,12 +53,13 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->only('name','parent_id','status');
+        $input['slug'] = Str::slug($input['name']);
         $info = Category::find($id);
         if (isset($info['id'])){
             $info->name = $input['name'];
             $info->parent_id = isset($input['parent_id']) ? $input['parent_id'] : null;
             $info->status = $input['status'];
-
+            $info->slug = $input['slug'];
             if ($info->save()){
                 $status = 'success';
                 $message = 'Sửa thành công';

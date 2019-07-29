@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title') Tạo Mới Bài Viết @endsection
-@section('breadcrumb') Tạo mới bài viết @endsection
+@section('title') Sửa Bài Viết @endsection
+@section('breadcrumb') Sửa bài viết @endsection
 @section('css')
 
 @endsection
@@ -51,7 +51,7 @@
     </script>
 @endsection
 @section('content')
-    <form method="post" action="{{route('admin.post.store')}}" class="form-material m-t-10">
+    <form method="post" action="{{route('admin.post.update',$info['id'])}}" class="form-material m-t-10">
         @csrf
         <div class="row">
             <div class="col-md-8">
@@ -61,34 +61,38 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <img id="holder">
+                                    <img id="holder" @if($info['avatar'] != null) src="{{asset('/').'/'.$info['avatar']}}" @endif>
                                     <br>
                                     <span class="input-group-btn">
                                         <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-info" style="color: white">
                                             <i class="fa fa-picture-o"></i> Chọn ảnh bìa
                                         </a>
                                     </span>
-                                    <input id="thumbnail" class="form-control file-upload" type="text" name="avatar">
+                                    <input id="thumbnail" class="form-control file-upload" type="text" name="avatar" value="{{$info['avatar']}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-line" placeholder="Tiêu đề bài viết..." name="name" required>
+                                    <input type="text" class="form-control form-control-line" placeholder="Tiêu đề bài viết..." name="name" required value="{{$info['name']}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <textarea rows="5" class="form-control form-control-line" name="summary" placeholder="Tóm tắt bài viết..." required></textarea>
+                                    <textarea rows="5" class="form-control form-control-line" name="summary" placeholder="Tóm tắt bài viết..." required>
+                                        {{$info['summary']}}
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 ">
-                                <textarea rows="10" class="form-control form-control-line my-editor" name="content" placeholder="Nội dung bài viết..."></textarea>
+                                <textarea rows="10" class="form-control form-control-line my-editor" name="content" placeholder="Nội dung bài viết...">
+                                    {!! $info['content'] !!}
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -101,7 +105,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Số lượt xem</label>
-                                    <input type="number" class="form-control" name="view" value="0">
+                                    <input type="number" class="form-control" name="view" value="{{$info['view'] != null ? $info['view'] : 0}}">
                                 </div>
                             </div>
                         </div>
@@ -112,7 +116,7 @@
                                     <select class="custom-select col-12" name="category_id" required>
                                         @if(count($categories) > 0)
                                             @foreach($categories as $key=> $item)
-                                                <option value="{{$key}}">{{$item}}</option>
+                                                <option value="{{$key}}" {{$info['category_id'] == $key ? 'selected' : ''}}>{{$item}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -126,7 +130,7 @@
                                     <select class="custom-select col-12" name="location_id" required>
                                         @if(count($locations) > 0)
                                             @foreach($locations as $key=> $item)
-                                                <option value="{{$key}}">{{$item}}</option>
+                                                <option value="{{$key}}" {{$info['location_id'] == $key ? 'selected' : ''}}>{{$item}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -137,13 +141,13 @@
                             <label class="control-label text-left col-md-12">Trạng thái:</label>
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-show" name="status" class="custom-control-input" value="1" checked>
+                                    <input type="radio" id="chk-show" name="status" class="custom-control-input" value="1"  {{$info['status'] == 1 ? 'checked' : ''}}>
                                     <label class="custom-control-label" for="chk-show">Hiện thị</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-hidden" name="status" class="custom-control-input" value="0">
+                                    <input type="radio" id="chk-hidden" name="status" class="custom-control-input" value="0" {{$info['status'] == 0 ? 'checked' : ''}}>
                                     <label class="custom-control-label" for="chk-hidden">Ẩn</label>
                                 </div>
                             </div>

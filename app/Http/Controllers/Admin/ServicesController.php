@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ServicesController extends Controller
 {
@@ -28,6 +29,7 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         $input = $request->only('name','icon','note','price','discount','status');
+        $input['slug'] = Str::slug($input['name']);
         $creat = Service::create($input);
         if ($creat){
             $status = 'success';
@@ -50,6 +52,7 @@ class ServicesController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->only('name','icon','note','price','discount','status');
+        $input['slug'] = Str::slug($input['name']);
         $info = Service::find($id);
         if (isset($info['id'])){
             $info->name = $input['name'];
@@ -58,7 +61,7 @@ class ServicesController extends Controller
             $info->discount = $input['discount'];
             $info->status = $input['status'];
             $info->note = $input['note'];
-
+            $info->slug = $input['slug'];
             if ($info->save()){
                 $status = 'success';
                 $message = 'Sửa thành công';

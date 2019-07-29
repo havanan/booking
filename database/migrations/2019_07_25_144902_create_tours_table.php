@@ -16,6 +16,7 @@ class CreateToursTable extends Migration
         Schema::create('tours', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->string('avatar')->nullable();
             $table->string('start_date')->nullable();
             $table->text('vehicle')->nullable();

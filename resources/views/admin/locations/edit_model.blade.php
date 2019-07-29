@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">IP:</label>
-                        <input type="text" class="form-control" required name="location" value="{{isset($data['location']) ? $data['location'] : ''}}">
+                        <input type="text" class="form-control" name="location" value="{{isset($data['location']) ? $data['location'] : ''}}">
                     </div>
                     <div class="form-group row">
                         <label class="control-label text-left col-md-12">Trạng thái:</label>

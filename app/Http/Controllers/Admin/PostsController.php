@@ -7,6 +7,8 @@ use App\Model\Location;
 use App\Model\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -42,7 +44,20 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $input = $request->only('name','avatar','summary','content','location_id','category_id','status','view');
-        dd($input);
+        $input['author_id'] = Auth::user()->id;
+        $input['slug'] = Str::slug($input['name']);
+        $creat = Post::create($input);
+        if ($creat){
+            $status = 'success';
+            $message = 'Tạo thành công';
+            return redirect()->route('admin.post.index')->with($status,$message);
+        }else{
+            $status = 'error';
+            $message = 'Tạo thất bại';
+            return back()->with($status,$message);
+        }
+
+
     }
 
     /**
@@ -53,7 +68,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $info = Post::with('location')->find($id);
+        return view('admin.posts.view',compact('info'));
     }
 
     /**
@@ -64,7 +80,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $info = Post::with('location')->find($id);
+        $categories = Category::where('status',1)->pluck('name','id');
+        $locations = Location::where('status',1)->pluck('name','id');
+        return view('admin.posts.edit',compact('info','categories','locations'));
+
     }
 
     /**
@@ -76,7 +96,19 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->only('name','avatar','summary','content','location_id','category_id','status','view');
+        $input['author_id'] = Auth::user()->id;
+        $input['slug'] = Str::slug($input['name']);
+        $update = Post::where('id',$id)->update($input);
+        if ($update){
+            $status = 'success';
+            $message = 'Sửa thành công';
+            return redirect()->route('admin.post.index')->with($status,$message);
+        }else{
+            $status = 'error';
+            $message = 'Sửa thất bại';
+            return back()->with($status,$message);
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class LocationsController extends Controller
 {
@@ -29,6 +30,7 @@ class LocationsController extends Controller
     public function store(Request $request)
     {
         $input = $request->only('name','status','location');
+        $input['slug'] = Str::slug($input['name']);
         $creat = Location::create($input);
         if ($creat){
             $status = 'success';
@@ -52,11 +54,13 @@ class LocationsController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->only('name','location','status');
+        $input['slug'] = Str::slug($input['name']);
         $info = Location::find($id);
         if (isset($info['id'])){
             $info->name = $input['name'];
-            $info->parent_id = isset($input['location']) ? $input['location'] : null;
+            $info->location = isset($input['location']) ? $input['location'] : null;
             $info->status = $input['status'];
+            $info->slug = $input['slug'];
 
             if ($info->save()){
                 $status = 'success';
@@ -65,7 +69,6 @@ class LocationsController extends Controller
                 $status = 'error';
                 $message = 'Sửa thất bại';
             }
-
         }else{
             $status = 'error';
             $message = 'Không có thông tin';
