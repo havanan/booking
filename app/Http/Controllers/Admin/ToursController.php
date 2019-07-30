@@ -47,7 +47,6 @@ class ToursController extends Controller
     {
         $category_id = $request->category_id;
         $vehicle = $request->vehicle;
-//        $param = $request->only('name','avatar','start_date','vehicle','slide','start_address','content','price','price_discount','price_children','price_baby','location_id','status','time','category_id');
         $input = $request->only('name','avatar','start_date','vehicle','slide','start_address','content','price','price_discount','price_children','price_baby','location_id','status','time');
         $input['slug'] = Str::slug($input['name']);
         $input['vehicle'] = json_encode($vehicle);
@@ -66,7 +65,6 @@ class ToursController extends Controller
             return redirect()->route('admin.tour.index')->with($status,$message);
             // all good
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             $status = 'error';
             $message = 'Tạo thất bại';
@@ -109,9 +107,11 @@ class ToursController extends Controller
     public function edit($id)
     {
         $info = Tour::with('location')->find($id);
-        $categories = Category::where('status',1)->pluck('name','id');
+        dd($info['vehicle']);
+        $categories_selected = TourCt::where('tour_id',$id)->pluck('tour_id','tour_category_id');
+        $categories = TourCategory::where('status',1)->pluck('name','id');
         $locations = Location::where('status',1)->pluck('name','id');
-        return view('admin.tours.edit',compact('info','categories','locations'));
+        return view('admin.tours.edit',compact('info','categories','locations','categories_selected'));
     }
 
     /**
@@ -123,17 +123,30 @@ class ToursController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $category_id = $request->category_id;
+        $vehicle = $request->vehicle;
         $input = $request->only('name','avatar','start_date','vehicle','slide','start_address','content','price','price_discount','price_children','price_baby','location_id','status','time');
         $input['slug'] = Str::slug($input['name']);
-        $update = Tour::where('id',$id)->update($input);
-        if ($update){
+        $input['vehicle'] = json_encode($vehicle);
+        DB::beginTransaction();
+
+        try {
+            $update = Tour::where('id',$id)->update($input);
+            $remove_log = TourCt::where('tour_id',$id)->delete();
+            $this->insertTourCt($category_id,$id);
+
             $status = 'success';
             $message = 'Sửa thành công';
-            return redirect()->route('admin.post.index')->with($status,$message);
-        }else{
+
+            DB::commit();
+            return redirect()->route('admin.tour.index')->with($status,$message);
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
             $status = 'error';
             $message = 'Sửa thất bại';
             return back()->with($status,$message);
+            // something went wrong
         }
     }
 

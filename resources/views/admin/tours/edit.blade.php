@@ -1,12 +1,15 @@
 @extends('layouts.admin')
-@section('title') Sửa Bài Viết @endsection
-@section('breadcrumb') Sửa bài viết @endsection
+@section('title') Sửa Tour @endsection
+@section('breadcrumb') Sửa tour @endsection
 @section('css')
+    <link href="{{asset('admin/assets/node_modules/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('js')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{{asset('vendor/laravel-filemanager/js/lfm.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/assets/node_modules/multiselect/js/jquery.multi-select.js')}}"></script>
+
     <script>
         $(document).ready(function(){
             var editor_config = {
@@ -48,6 +51,7 @@
         });
         var route_prefix = "{{ url(config('lfm.url_prefix')) }}";
         $('#lfm').filemanager('image', {prefix: route_prefix});
+        $('#pre-selected-options').multiSelect();
     </script>
 @endsection
 @section('content')
@@ -75,16 +79,7 @@
                         <div class="row">
                             <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-line" placeholder="Tiêu đề bài viết..." name="name" required value="{{$info['name']}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 ">
-                                <div class="form-group">
-                                    <textarea rows="5" class="form-control form-control-line" name="summary" placeholder="Tóm tắt bài viết..." required>
-                                        {{$info['summary']}}
-                                    </textarea>
+                                    <input type="text" class="form-control form-control-line" placeholder="Tên Tour..." name="name" required value="{{$info['name']}}">
                                 </div>
                             </div>
                         </div>
@@ -95,35 +90,7 @@
                                 </textarea>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Số lượt xem</label>
-                                    <input type="number" class="form-control" name="view" value="{{$info['view'] != null ? $info['view'] : 0}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Loại bài viết</label>
-                                    <select class="custom-select col-12" name="category_id" required>
-                                        @if(count($categories) > 0)
-                                            @foreach($categories as $key=> $item)
-                                                <option value="{{$key}}" {{$info['category_id'] == $key ? 'selected' : ''}}>{{$item}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+                        <div class="row  mt-2">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Địa điểm du lịch</label>
@@ -137,18 +104,122 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="control-label text-left col-md-12">Trạng thái:</label>
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-show" name="status" class="custom-control-input" value="1"  {{$info['status'] == 1 ? 'checked' : ''}}>
-                                    <label class="custom-control-label" for="chk-show">Hiện thị</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label text-left">Trạng thái:</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="chk-show" name="status" class="custom-control-input" value="1"  {{$info['status'] == 1 ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="chk-show">Hiện thị</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="chk-hidden" name="status" class="custom-control-input" value="0" {{$info['status'] == 0 ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="chk-hidden">Ẩn</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-hidden" name="status" class="custom-control-input" value="0" {{$info['status'] == 0 ? 'checked' : ''}}>
-                                    <label class="custom-control-label" for="chk-hidden">Ẩn</label>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label text-left">Phương tiện:</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="custom-control custom-radio">
+                                                <input type="checkbox" id="chk-car" name="vehicle[]" class="custom-control-input" value="car"  {{isset($info['vehicle']['car']) ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="chk-car">Ô tô</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="custom-control custom-radio">
+                                                <input type="checkbox" id="chk-plane" name="vehicle[]" class="custom-control-input" value="plane" {{isset($info['vehicle']['plane']) ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="chk-plane">Máy bay</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="custom-control custom-radio">
+                                                <input type="checkbox" id="chk-train" name="vehicle[]" class="custom-control-input" value="train" {{isset($info['vehicle']['train']) ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="chk-train">Tàu hỏa</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Giá:</label>
+                                    <input type="number" class="form-control" name="price" value="{{$info['price']}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Giá khuyến mại:</label>
+                                    <input type="number" class="form-control" name="price_discount" value="{{$info['price_discount']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Giá trẻ em (từ 5-9 tuổi):</label>
+                                    <input type="number" class="form-control" name="price_children" value="{{$info['price_children']}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Giá baby:</label>
+                                    <input type="number" class="form-control" name="price_baby" value="{{$info['price_baby']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Ngày khởi hành:</label>
+                                    <input type="text" class="form-control form-control-line"  name="start_date" value="{{$info['start_date']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Địa điểm khởi hành:</label>
+                                    <input type="text" class="form-control form-control-line"  name="start_address" value="{{$info['start_address']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Thời gian tour:</label>
+                                    <input type="text" class="form-control form-control-line"  name="time" value="{{$info['time']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Loại tour</label>
+                                    <select id='pre-selected-options' multiple='multiple' class="form-control" required name="category_id[]">
+                                        @if(count($categories) > 0)
+                                            @foreach($categories as $key=> $item)
+                                                <option value="{{$key}}" {{isset($categories_selected[$key]) ? 'selected' : ''}}>{{$item}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>

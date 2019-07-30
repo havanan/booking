@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title') Tạo Mới Bài Viết @endsection
-@section('breadcrumb') Tạo mới bài viết @endsection
+@section('title') Tạo Mới Tour @endsection
+@section('breadcrumb') Tạo mới tour @endsection
 @section('css')
     <link href="{{asset('admin/assets/node_modules/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 
