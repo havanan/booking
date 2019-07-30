@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title') Danh Sách Bài Viết @endsection
-@section('breadcrumb') Danh sách bài viết @endsection
+@section('title') Danh Sách Tour @endsection
+@section('breadcrumb') Danh sách tour @endsection
 @section('js')
     <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>
@@ -11,7 +11,7 @@
            <div class="card">
                <div class="card-body">
                     <div class="row">
-                        <a href="{{route('admin.post.create')}}" class="btn btn-info"> <i class="fa fa-plus-circle"></i> Tạo mới</a>
+                        <a href="{{route('admin.tour.create')}}" class="btn btn-info"> <i class="fa fa-plus-circle"></i> Tạo mới</a>
                     </div>
                    @include('layouts.components.notification')
                    <div class="table-responsive m-t-40">
@@ -19,11 +19,10 @@
                            <thead>
                            <tr>
                                <th class="text-center">Stt</th>
-                               <th class="text-center">Mã bài viết</th>
+                               <th class="text-center">Mã tour</th>
                                <th>Tên</th>
-                               <th class="text-center">Tác giả</th>
+                               <th >Giá</th>
                                <th class="text-center">Địa danh</th>
-                               <th class="text-center">Lượt xem</th>
                                <th class="text-center">Ngày tạo</th>
                                <th class="text-center">Trạng thái</th>
                                <th class="text-center">Tác vụ</th>
@@ -34,16 +33,20 @@
                                @foreach($data as $key => $item)
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
-                                       <td class="text-center">P-{{$item->id}}</td>
-                                       <td>
+                                       <td class="text-center">Tr-{{$item->id}}</td>
+                                       <td title="{{$item->name}}">
                                            @if($item->avatar != null)
                                            <img class="thumb-sm" src="{{asset('/').'/'.$item->avatar}}" >
                                            @endif
-                                           <strong>{{$item->name}}</strong>
+                                           <strong>{{ substr ($item->name,0,30) }}...</strong>
                                        </td>
-                                       <td class="text-center">{{$item->author->name}}</td>
+                                       <td>
+                                           <p>Giá: {{number_format($item->price)}} vnđ</p>
+                                           {{--<p>Giá khuyến mại: {{number_format($item->price_discount)}} vnđ</p>--}}
+                                           {{--<p>Giá trẻ em (từ 5-9 tuổi): {{number_format($item->price_children)}} vnđ</p>--}}
+                                           {{--<p>Giá baby: {{number_format($item->price_baby)}} vnđ</p>--}}
+                                       </td>
                                        <td class="text-center">{{$item->location->name}}</td>
-                                       <td class="text-center">{{number_format($item->view)}}</td>
                                        <td class="text-center">{{date('d/m/Y',strtotime($item->created_at))}}</td>
                                        <td class="text-center">
                                            @if($item->status == 1)
@@ -57,16 +60,10 @@
                                            @endif
                                        </td>
                                        <td class="text-center">
-                                           <a href="{{route('admin.post.show',$item['id'])}}" class="btn btn-info"><i class="icon-eye"></i></a>
-
-                                           @if(Auth::user()->id == $item['author_id'] || Auth::user()->role == 1)
-                                               <a href="{{route('admin.post.edit',$item['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>
-                                               <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
-                                           @else
-                                               <button class="btn btn-primary" disabled><i class="icon-pencil" title="Chỉ Admin hoặc tác giả mới thực hiện được tác vụ"></i></button>
-                                               <button class="btn btn-danger" disabled><i class="icon-trash" title="Chỉ Admin hoặc tác giả mới thực hiện được tác vụ"></i></button>
-                                           @endif
-                                           @include('admin.posts.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           <a href="{{route('admin.tour.show',$item['id'])}}" class="btn btn-info"><i class="icon-eye"></i></a>
+                                           <a href="{{route('admin.tour.edit',$item['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>
+                                           <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
+                                           @include('admin.tours.delete_model',['title' =>$item->name,'id' => $item->id])
                                        </td>
                                    </tr>
                                @endforeach

@@ -105,7 +105,10 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('tours')->group(function () {
         Route::get('/', 'ToursController@index')->name('admin.tour.index');
+        Route::get('create', 'ToursController@create')->name('admin.tour.create');
         Route::post('store', 'ToursController@store')->name('admin.tour.store');
+        Route::get('show/{id}', 'ToursController@show')->name('admin.tour.show');
+        Route::get('edit/{id}', 'ToursController@edit')->name('admin.tour.edit');
         Route::post('update/{id}', 'ToursController@update')->name('admin.tour.update');
         Route::get('destroy/{id}', 'ToursController@destroy')->name('admin.tour.destroy');
     });
