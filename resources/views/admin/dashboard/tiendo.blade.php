@@ -34,12 +34,12 @@
                                         <li> <a class="waves-effect waves-dark" href="{{route('admin.icon')}}" aria-expanded="false"><i class="icon-check text-success"></i><span class="hide-menu">Icon</span></a></li>
 
                                         <li class="nav-small-cap"></li>
-                                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-user"></i><span class="hide-menu">Nhân viên</span></a>
+                                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-check text-success"></i><span class="hide-menu">Nhân viên</span></a>
                                             <ul aria-expanded="false" class="collapse">
                                                 <li><a href="{{route('admin.user.index')}}">Danh sách <i class="icon-envelope-open"></i></a></li>
                                             </ul>
                                         </li>
-                                        <li> <a class="waves-effect waves-dark" href="{{route('admin.customer.index')}}" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Khách hàng</span></a></li>
+                                        <li> <a class="waves-effect waves-dark" href="{{route('admin.customer.index')}}" aria-expanded="false"><i class="icon-check text-success"></i><span class="hide-menu">Khách hàng</span></a></li>
                                         <li class="nav-small-cap"></li>
                                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-check text-success"></i><span class="hide-menu">Bài viết</span></a>
                                             <ul aria-expanded="false" class="collapse">
