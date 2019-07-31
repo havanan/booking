@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Category;
 use App\Model\Location;
+use App\Model\Service;
 use App\Model\Tour;
 use App\Model\TourCt;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,8 @@ class ToursController extends Controller
     {
         $categories = TourCategory::where('status',1)->pluck('name','id');
         $locations = Location::where('status',1)->pluck('name','id');
-        return view('admin.tours.create',compact('categories','locations'));
+        $services = Service::where('status',1)->get();
+        return view('admin.tours.create',compact('categories','locations','services'));
     }
 
     /**
@@ -47,15 +49,16 @@ class ToursController extends Controller
     {
         $category_id = $request->category_id;
         $vehicle = $request->vehicle;
+        $services = $request->service;
         $input = $request->only('name','avatar','start_date','vehicle','slide','start_address','content','price','price_discount','price_children','price_baby','location_id','status','time');
         $input['slug'] = Str::slug($input['name']);
         $input['vehicle'] = json_encode($vehicle);
+        $input['service'] = json_encode($services);
 
         DB::beginTransaction();
 
         try {
             $creat = Tour::create($input);
-
             $this->insertTourCt($category_id,$creat->id);
 
             $status = 'success';
@@ -65,6 +68,7 @@ class ToursController extends Controller
             return redirect()->route('admin.tour.index')->with($status,$message);
             // all good
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             $status = 'error';
             $message = 'Tạo thất bại';
@@ -95,7 +99,23 @@ class ToursController extends Controller
     public function show($id)
     {
         $info = Tour::with('location')->find($id);
-        return view('admin.tours.view',compact('info'));
+        $services_seleced = array();
+        $vehicle_seleced = array();
+
+        $vehicle = json_decode($info['vehicle']);
+        $services = json_decode($info['service']);
+
+        if ($vehicle != null){
+            $vehicle_seleced = array_flip($vehicle);
+
+        }
+        if ($services != null){
+            $services_seleced = array_flip($services);
+
+        }
+        $categories_selected = TourCt::where('tour_id',$id)->get();
+        $services = Service::where('status',1)->get();
+        return view('admin.tours.view',compact('info','categories_selected','services','vehicle_seleced','services_seleced'));
     }
 
     /**
@@ -107,11 +127,25 @@ class ToursController extends Controller
     public function edit($id)
     {
         $info = Tour::with('location')->find($id);
-        dd($info['vehicle']);
+        $services_seleced = array();
+        $vehicle_seleced = array();
+
+        $vehicle = json_decode($info['vehicle']);
+        $services = json_decode($info['service']);
+
+        if ($vehicle != null){
+            $vehicle_seleced = array_flip($vehicle);
+
+        }
+        if ($services != null){
+            $services_seleced = array_flip($services);
+
+        }
         $categories_selected = TourCt::where('tour_id',$id)->pluck('tour_id','tour_category_id');
         $categories = TourCategory::where('status',1)->pluck('name','id');
         $locations = Location::where('status',1)->pluck('name','id');
-        return view('admin.tours.edit',compact('info','categories','locations','categories_selected'));
+        $services = Service::where('status',1)->get();
+        return view('admin.tours.edit',compact('info','categories','locations','categories_selected','services','vehicle_seleced','services_seleced'));
     }
 
     /**
@@ -125,9 +159,11 @@ class ToursController extends Controller
     {
         $category_id = $request->category_id;
         $vehicle = $request->vehicle;
+        $services = $request->service;
         $input = $request->only('name','avatar','start_date','vehicle','slide','start_address','content','price','price_discount','price_children','price_baby','location_id','status','time');
         $input['slug'] = Str::slug($input['name']);
         $input['vehicle'] = json_encode($vehicle);
+        $input['service'] = json_encode($services);
         DB::beginTransaction();
 
         try {

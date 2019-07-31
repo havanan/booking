@@ -130,27 +130,53 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="custom-control custom-radio">
-                                                <input type="checkbox" id="chk-car" name="vehicle[]" class="custom-control-input" value="car"  {{isset($info['vehicle']['car']) ? 'checked' : ''}}>
+                                                <input type="checkbox" id="chk-car" name="vehicle[]" class="custom-control-input" value="car"  {{isset($vehicle_seleced['car'])   ? 'checked' : ''}}>
                                                 <label class="custom-control-label" for="chk-car">Ô tô</label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="custom-control custom-radio">
-                                                <input type="checkbox" id="chk-plane" name="vehicle[]" class="custom-control-input" value="plane" {{isset($info['vehicle']['plane']) ? 'checked' : ''}}>
+                                                <input type="checkbox" id="chk-plane" name="vehicle[]" class="custom-control-input" value="plane" {{isset($vehicle_seleced['plane'])  ? 'checked' : ''}}>
                                                 <label class="custom-control-label" for="chk-plane">Máy bay</label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="custom-control custom-radio">
-                                                <input type="checkbox" id="chk-train" name="vehicle[]" class="custom-control-input" value="train" {{isset($info['vehicle']['train']) ? 'checked' : ''}}>
+                                                <input type="checkbox" id="chk-train" name="vehicle[]" class="custom-control-input" value="train" {{isset($vehicle_seleced['train'])  ? 'checked' : ''}}>
                                                 <label class="custom-control-label" for="chk-train">Tàu hỏa</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label text-left">Dịch vụ đi kèm:</label>
+                                    <div class="row">
+                                        @if(count($services) > 0)
+                                            @foreach($services as $item)
+                                                <div class="col-md-2">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="checkbox"
+                                                               id="chk-{{$item->slug}}"
+                                                               name="service[]"
+                                                               class="custom-control-input"
+                                                               value="{{$item->slug}}"
+                                                                {{isset($services_seleced[$item->slug]) ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="chk-{{$item->slug}}">
+                                                            <i class="{{$item->icon}}"></i> {{$item->name}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

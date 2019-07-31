@@ -19,8 +19,8 @@ class CreateServicesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('icon')->nullable();
             $table->string('note')->nullable();
-            $table->float('price',9,3)->nullable();
-            $table->float('discount',9,3)->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('discount')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });

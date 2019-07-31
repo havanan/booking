@@ -38,7 +38,7 @@
                                            @if($item->avatar != null)
                                            <img class="thumb-sm" src="{{asset('/').'/'.$item->avatar}}" >
                                            @endif
-                                           <strong>{{ substr ($item->name,0,30) }}...</strong>
+                                           <strong>{{ $item->name }}</strong>
                                        </td>
                                        <td>
                                            <p>Giá: {{number_format($item->price)}} vnđ</p>

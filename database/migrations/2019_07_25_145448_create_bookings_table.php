@@ -22,8 +22,8 @@ class CreateBookingsTable extends Migration
             $table->integer('amount')->nullable();
             $table->date('booking_date')->nullable();
             $table->date('start_date')->nullable();
-            $table->float('total_price',9,3)->nullable();
-            $table->float('discount',9,3)->nullable();
+            $table->integer('total_price')->nullable();
+            $table->integer('discount')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });
