@@ -107,6 +107,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="control-label text-left">Dịch vụ đi kèm:
+                                    <br>
                                     @if(count($services) > 0)
                                         @foreach($services as $item)
                                             <strong>
