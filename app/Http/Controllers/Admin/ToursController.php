@@ -22,7 +22,7 @@ class ToursController extends Controller
      */
     public function index()
     {
-       $data = Tour::all();
+       $data = Tour::orderBy('id','desc')->get();
        return view('admin.tours.index',compact('data'));
     }
 
@@ -178,6 +178,7 @@ class ToursController extends Controller
             return redirect()->route('admin.tour.index')->with($status,$message);
             // all good
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             $status = 'error';
             $message = 'Sửa thất bại';

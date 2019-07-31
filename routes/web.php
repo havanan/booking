@@ -35,6 +35,8 @@ Route::namespace('Frontend')->group(function () {
 
     Route::prefix('posts')->group(function () {
         Route::get('/', 'PostsController@index')->name('post.index');
+        Route::get('view/{slug}', 'PostsController@view')->name('post.view');
+
     });
 
     Route::prefix('services')->group(function () {
@@ -43,6 +45,7 @@ Route::namespace('Frontend')->group(function () {
 
     Route::prefix('tours')->group(function () {
         Route::get('/', 'ToursController@index')->name('tour.index');
+        Route::get('view/{slug}', 'ToursController@view')->name('tour.view');
     });
 
     Route::prefix('tour-categories')->group(function () {
