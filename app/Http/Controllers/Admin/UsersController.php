@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -28,17 +29,27 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only('name','status','location');
+        $password = $request->password;
+        $password_confirmation = $request->password_confirmation;
+
+        if ($password != $password_confirmation){
+            $status = 'error';
+            $message = 'Xác thực mật khẩu không đúng, vui lòng nhập lại';
+            return back()->with($status,$message);
+        }
+        $input = $request->only('name','username','email','phone','address','status');
+        $input['password'] = bcrypt($password);
+
         $creat = User::create($input);
         if ($creat){
             $status = 'success';
             $message = 'Tạo thành công';
-
+            return redirect()->route('admin.user.index')->with($status,$message);
         }else{
             $status = 'error';
             $message = 'Tạo thất bại';
+            return back()->with($status,$message);
         }
-        return back()->with($status,$message);
     }
 
 
@@ -51,28 +62,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only('name','location','status');
-        $info = User::find($id);
-        if (isset($info['id'])){
-            $info->name = $input['name'];
-            $info->parent_id = isset($input['location']) ? $input['location'] : null;
-            $info->status = $input['status'];
-
-            if ($info->save()){
-                $status = 'success';
-                $message = 'Sửa thành công';
-            }else{
-                $status = 'error';
-                $message = 'Sửa thất bại';
-            }
-
+        $input = $request->only('name','username','email','phone','address','status');
+        $update = User::where('id',$id)->update($input);
+        if ($update){
+            $status = 'success';
+            $message = 'Sửa thành công';
+            return redirect()->route('admin.user.index')->with($status,$message);
         }else{
             $status = 'error';
-            $message = 'Không có thông tin';
+            $message = 'Sửa thất bại';
+            return back()->with($status,$message);
         }
-
-
-        return back()->with($status,$message);
     }
 
     /**

@@ -73,6 +73,7 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
         Route::post('store', 'CustomersController@store')->name('admin.customer.store');
         Route::post('update/{id}', 'CustomersController@update')->name('admin.customer.update');
         Route::get('destroy/{id}', 'CustomersController@destroy')->name('admin.customer.destroy');
+
     });
 
     Route::prefix('locations')->group(function () {
@@ -126,6 +127,8 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
         Route::post('update/{id}', 'UsersController@update')->name('admin.user.update');
         Route::get('destroy/{id}', 'UsersController@destroy')->name('admin.user.destroy');
         Route::get('my-profile', 'UsersController@myProfile')->name('admin.user.my_profile');
+        Route::get('pw-default/{id}', 'CustomersController@pwDefault')->name('admin.customer.pw_default');
+
 
     });
     Route::prefix('prices')->group(function () {

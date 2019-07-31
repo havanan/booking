@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title') Danh Sách Nhân Viên @endsection
-@section('breadcrumb') Danh sách nhân viên @endsection
+@section('title') Danh Sách Khách Hàng @endsection
+@section('breadcrumb') Danh sách khách hàng @endsection
 @section('js')
     <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>
@@ -22,9 +22,8 @@
                            <thead>
                            <tr>
                                <th class="text-center">Stt</th>
-                               <th class="text-center">Mã nhân viên</th>
+                               <th class="text-center">Mã khách hàng</th>
                                <th>Tên</th>
-                               <th class="text-center">Quyền</th>
                                <th class="text-center">Trạng thái</th>
                                <th class="text-center">Ngày tạo</th>
                                <th class="text-center">Tác vụ</th>
@@ -35,10 +34,8 @@
                                @foreach($data as $key => $item)
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
-                                       <td class="text-center">NV-{{$item->id}}</td>
+                                       <td class="text-center">KH-{{$item->id}}</td>
                                        <td><strong>{{$item->name}}</strong></td>
-                                       <td class="text-center">{{$item->role == 1 ? 'Admin' : 'Nhân viên'}}</td>
-
                                        <td class="text-center">
                                            @if($item->status == 1)
                                                <h4>
@@ -54,9 +51,9 @@
                                        <td class="text-center">
                                            <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal-{{$item->id}}"><i class="icon-pencil"></i></button>
                                            <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
-                                           @include('admin.users.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           @include('admin.customers.delete_model',['title' =>$item->name,'id' => $item->id])
                                        </td>
-                                       @include('admin.users.edit_model',['title' =>$item->name,'data' => $item])
+                                       @include('admin.customers.edit_model',['title' =>$item->name,'data' => $item])
                                    </tr>
                                @endforeach
                            @endif
@@ -67,5 +64,5 @@
            </div>
        </div>
     </div>
-@include('admin.users.create_model')
+@include('admin.customers.create_model',['title' => 'Tạo Loại Tour','url' => route('admin.customer.store')])
 @endsection

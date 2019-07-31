@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Sửa Nhân Viên</h4>
+                <h4 class="modal-title">Sửa Khách Hàng</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form method="post" action="{{route('admin.user.update',$data['id'])}}">
+            <form method="post" action="{{route('admin.customer.update',$data['id'])}}">
             <div class="modal-body">
                     @csrf
                 <div class="row">
@@ -42,23 +42,6 @@
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="chk-hidden-{{$data['id']}}" name="status" class="custom-control-input" value="0" {{isset($data['status']) && $data['status'] == 0 ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="chk-hidden-{{$data['id']}}">Ẩn</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label text-left col-md-12">Quyền:</label>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-admin" name="role" class="custom-control-input" value="1"  {{isset($data['role']) && $data['role'] == 1 ? 'checked' : ''}}>
-                                    <label class="custom-control-label" for="chk-admin">Admin</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="chk-nv" name="role" class="custom-control-input" value="0" checked {{isset($data['role']) && $data['role'] == 0 ? 'checked' : ''}}>
-                                    <label class="custom-control-label" for="chk-nv">Nhân viên</label>
-                                </div>
                             </div>
                         </div>
                     </div>
