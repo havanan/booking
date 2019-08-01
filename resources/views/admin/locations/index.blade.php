@@ -4,6 +4,13 @@
 @section('js')
     <script src="{{asset('admin')}}/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/data-table-init.js')}}"></script>
+    <script src="{{asset('vendor/laravel-filemanager/js/lfm.js')}}"></script>
+    <script>
+        var route_prefix = "{{ url(config('lfm.url_prefix')) }}";
+        // $('.lfm').filemanager('image', {prefix: route_prefix});
+        $('#upload-avatar').filemanager('image', {prefix: route_prefix});
+
+    </script>
 @endsection
 @section('content')
     <div class="row">
@@ -35,7 +42,12 @@
                                    <tr>
                                        <td class="text-center">{{$key +1}}</td>
                                        <td class="text-center">LC-{{$item->id}}</td>
-                                       <td><strong>{{$item->name}}</strong></td>
+                                       <td>
+                                           @if($item->avatar != null)
+                                               <img class="thumb-sm" src="{{asset('/').'/'.$item->avatar}}" >
+                                           @endif
+                                           <strong>{{$item->name}}</strong>
+                                       </td>
                                        <td class="text-center">
                                            @if($item->status == 1)
                                                <h4>

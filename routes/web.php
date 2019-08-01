@@ -14,7 +14,7 @@
 
 Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
-
+    Route::get('tim-kiem-theo-dia-danh', 'ToursController@findByLocation')->name('tour.find_by_location');
 
     Route::get('dashboard', 'DashboardController@index')->name('admin.index');
 
@@ -30,18 +30,20 @@ Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
         Route::get('/', 'CustomersController@index')->name('customer.index');
     });
 
-    Route::prefix('locations')->group(function () {
+    Route::prefix('dia-diem-du-lich')->group(function () {
         Route::get('/', 'LocationsController@index')->name('location.index');
+        Route::get('danh-sach', 'LocationsController@getAll')->name('location.get_all');
+
     });
 
     Route::prefix('posts')->group(function () {
         Route::get('/', 'PostsController@index')->name('post.index');
         Route::get('get-all-category', 'PostsController@getAllCat')->name('post.get_all_cat');
-        Route::get('get-by-category/{slug}', 'PostsController@getByCat')->name('post.get_by_cat');
+        Route::get('/{slug}', 'PostsController@getByCat')->name('post.get_by_cat');
 
         Route::get('/', 'PostsController@index')->name('post.index');
 
-        Route::get('view/{slug}', 'PostsController@view')->name('post.view');
+        Route::get('chi-tiet-bai-viet/{slug}', 'PostsController@view')->name('post.view');
 
     });
 
@@ -51,12 +53,12 @@ Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
 
     Route::prefix('tours')->group(function () {
         Route::get('/', 'ToursController@index')->name('tour.index');
-        Route::get('view/{slug}', 'ToursController@view')->name('tour.view');
-        Route::get('book/{slug}', 'ToursController@book')->name('tour.book');
-        Route::get('get-by-category/{slug}', 'ToursController@getByCat')->name('tour.get_by_cat');
-        Route::get('find', 'ToursController@find')->name('tour.find');
+        Route::get('xem-chi-tiet/{slug}', 'ToursController@view')->name('tour.view');
+        Route::get('dat-tour/{slug}', 'ToursController@book')->name('tour.book');
+        Route::post('dat-tour/{slug}', 'ToursController@booking');
 
-
+        Route::get('/{slug}', 'ToursController@getByCat')->name('tour.get_by_cat');
+        Route::get('tim-kiem', 'ToursController@find')->name('tour.find');
     });
 
     Route::prefix('tour-categories')->group(function () {

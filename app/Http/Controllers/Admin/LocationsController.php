@@ -16,7 +16,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        $data = Location::all();
+        $data = Location::orderBy('id','desc')->get();
         return view('admin.locations.index',compact('data'));
 
     }
@@ -29,7 +29,7 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only('name','status','location');
+        $input = $request->only('name','status','location','avatar');
         $input['slug'] = Str::slug($input['name']);
         $creat = Location::create($input);
         if ($creat){
@@ -53,7 +53,7 @@ class LocationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only('name','location','status');
+        $input = $request->only('name','location','status','avatar');
         $input['slug'] = Str::slug($input['name']);
         $info = Location::find($id);
         if (isset($info['id'])){

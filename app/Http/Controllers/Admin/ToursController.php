@@ -34,7 +34,7 @@ class ToursController extends Controller
     public function create()
     {
         $categories = TourCategory::where('status',1)->pluck('name','id');
-        $locations = Location::where('status',1)->pluck('name','id');
+        $locations = Location::where('status',1)->orderBy('location')->pluck('name','id');
         $services = Service::where('status',1)->get();
         return view('admin.tours.create',compact('categories','locations','services'));
     }
@@ -143,7 +143,7 @@ class ToursController extends Controller
         }
         $categories_selected = TourCt::where('tour_id',$id)->pluck('tour_id','tour_category_id');
         $categories = TourCategory::where('status',1)->pluck('name','id');
-        $locations = Location::where('status',1)->pluck('name','id');
+        $locations = Location::where('status',1)->orderBy('location')->pluck('name','id');
         $services = Service::where('status',1)->get();
         return view('admin.tours.edit',compact('info','categories','locations','categories_selected','services','vehicle_seleced','services_seleced'));
     }

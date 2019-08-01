@@ -1,5 +1,5 @@
 @extends('layouts.travel')
-@section('title')Trang chủ@endsection
+@section('title')Trang chủ @endsection
 @section('content')
     @include('frontend.home.search_box')
     <!-- /.page-hero -->
@@ -12,7 +12,7 @@
                         <div>Nhũng điểm du lịch giá tốt nhất trong tháng {{date('m')}}</div>
                     </div>
                     <div class="text-right">
-                        <a href="#">Xem thêm</a>
+                        <a href="{{route('tour.get_by_cat','tour-gia-re')}}">Xem thêm</a>
                     </div>
                     <!-- /.float-right -->
                 </div>
@@ -36,7 +36,7 @@
                         <h3>Tour Trong Nước</h3>
                     </div>
                     <div class="text-right">
-                        <a href="#">Xem thêm</a>
+                        <a href="{{route('tour.get_by_cat','tour-trong-nuoc')}}">Xem thêm</a>
                     </div>
                     <!-- /.float-right -->
                 </div>
@@ -60,7 +60,7 @@
                         <h3>Tour Quốc Tế</h3>
                     </div>
                     <div class="text-right">
-                        <a href="#">Xem thêm</a>
+                        <a href="{{route('tour.get_by_cat','tour-quoc-te')}}">Xem thêm</a>
                     </div>
                     <!-- /.float-right -->
                 </div>
@@ -82,10 +82,10 @@
                 <div class="col-12 d-flex align-items-end justify-content-between">
                     <div class="flex-1">
                         <h3>Điểm du lịch phổ biến</h3>
-                        <div>Tổng hợp những điểm du lịch được nhiều khách hàng lựa chọn nhất trong hè 2019</div>
+                        <div>Tổng hợp những điểm du lịch được nhiều khách hàng lựa chọn nhất trong hè {{date('Y')}}</div>
                     </div>
                     <div class="text-right">
-                        <a href="#">Xem thêm</a>
+                        <a href="{{route('location.get_all')}}">Xem thêm</a>
                     </div>
                     <!-- /.float-right -->
                 </div>

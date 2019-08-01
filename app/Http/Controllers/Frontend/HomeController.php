@@ -26,7 +26,7 @@ class HomeController extends Controller
         $tour_domestic = $this->getTour($params);
         $params['tour_category_id'] = 2;
         $tour_inter = $this->getTour($params);
-        $post = Post::where('status',1)->first();
+        $post = Post::where('status',1)->orderBy('id','desc')->first();
         return view('frontend.home.index',compact('tour_cheap','tour_domestic','tour_inter','post'));
     }
     public function getTour($params)

@@ -172,20 +172,24 @@
             }
         });
 
-        $('.main-home-search').find('.search-result-item').on('click', function () {
-           $('.search-result-drop-down').toggleClass('show');
-        });
+        // $('.main-home-search').find('.search-result-item').on('click', function () {
+        //    $('.search-result-drop-down').toggleClass('show');
+        // });
         element.on('focusout', function () {
             $('.main-home-search').removeClass('active');
-        });
-        element.on('keyup', function (e) {
-
-            if (e.target.value.length > 1) {
-                $(this).parent().find('.search-result-drop-down').addClass('show');
-            } else {
-                $(this).parent().find('.search-result-drop-down').removeClass('show');
+            var keyword =  $('.search-input').val();
+            if (keyword.length > 0){
+                $('#searchLocation').submit();
             }
         });
+        // element.on('keyup', function (e) {
+        //
+        //     if (e.target.value.length > 1) {
+        //         $(this).parent().find('.search-result-drop-down').addClass('show');
+        //     } else {
+        //         $(this).parent().find('.search-result-drop-down').removeClass('show');
+        //     }
+        // });
     }
 
     // Section Img //

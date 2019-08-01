@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Model\Location;
 use App\Model\Service;
 use App\Model\Tour;
 use App\Model\TourCategory;
@@ -32,6 +33,12 @@ class ToursController extends Controller
                 $query->where('tour_category_id', '=', $params['tour_category_id']);
             });
         }
+        if (isset($params['location_name']) and $params['location_name'] != null ){
+
+            $data = $data-> whereHas('location',function ($query) use ($params){
+                $query->where('locations.name', 'like', '%'.$params['location_name'].'%');
+            });
+        }
         if (isset($params['name'])){
             $data = $data ->where('name','like','%'.$params['name'].'%');
         }
@@ -42,7 +49,7 @@ class ToursController extends Controller
             $data = $data ->where('name','like','%'.$params['name'].'%');
         }
         if (isset($params['location']) and $params['location'] != null){
-            $data = $data ->whereIn('location',$params['location']);
+            $data = $data ->whereIn('location_id',$params['location']);
         }
         if (isset($params['price_gr'])){
           $data = $data->where(function ($query) use($params) {
@@ -64,7 +71,6 @@ class ToursController extends Controller
     public function find(Request $request){
         $services_selected= array();
         $params = $request->only('name','tour_category_id');
-
        $price = $request->price;
        $service = $request->service;
        $info = TourCategory::find($request->tour_category_id);
@@ -82,5 +88,30 @@ class ToursController extends Controller
         }
         return view('frontend.tour.index',compact('data','info','params','services_selected'));
 
+    }
+    public function findByLocation(Request $request){
+        $params = array();
+        $services_selected = array();
+
+        $location_name = $request->location_name;
+        $info['name'] =$location_name;
+        $info['id'] =null;
+
+        $params['paginate'] = 12;
+        $params['location_name'] = $location_name;
+        $data = $this->getTour($params);
+        return view('frontend.tour.index',compact('data','info','params','services_selected'));
+
+    }
+    public function view($slug){
+       $info = Tour::where('slug','like','%'.$slug.'%')->first();
+        return view('frontend.tour.view',compact('info'));
+    }
+    public function book($slug){
+        $info = Tour::where('slug','like','%'.$slug.'%')->first();
+        return view('frontend.tour.book',compact('info'));
+    }
+    public function booking(Request $request,$slug){
+        dd($request->all(),$slug);
     }
 }

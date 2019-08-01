@@ -18,9 +18,9 @@
                 <!-- /.title -->
                 <div class="descrtiption">
                     @if($item->price > 0 && $item->price_discount <= 0)
-                        <span class="text-danger">{{number_format($item->price)}} vnđ</span>
+                        <span class="text-danger">{{number_format($item->price)}} VNĐ</span>
                     @elseif($item->price_discount > 0)
-                        <span class="text-danger">{{number_format($item->price_discount)}} vnđ</span>
+                        <span class="text-danger">{{number_format($item->price_discount)}} VNĐ</span>
                     @else
                         <span class="text-danger">Liên hệ</span>
 

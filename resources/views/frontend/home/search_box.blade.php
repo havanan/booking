@@ -9,81 +9,26 @@
                         <div class="search-icon">
                             <i class="fa fa-search"></i>
                         </div>
-                        <!-- /.search-icon -->
-                        <input type="text" class="search-input" placeholder='Quốc gia, thành phố, địa điểm du lịch'/>
+                        <form method="get" action="{{route('tour.find_by_location')}}" id="searchLocation">
+                            <!-- /.search-icon -->
+                            <input type="text" class="search-input" placeholder='Quốc gia, thành phố, địa điểm du lịch' name="location_name"/>
+                        </form>
                         <!-- /.search-input -->
                         <div class="search-result-drop-down">
                             <div class="result-list">
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-map-marker mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        London (and vicinity), England, United Kingdom
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-map-marker mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        Londonderry (county), Northern Ireland, United Kingdom
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-map-marker mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        London, Kentucky, United States of America
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-sleeping-bed-silhouette mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        Londonderry, New Hampshire, United States of America
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-traveler-with-a-suitcase mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        London (and vicinity), England, United Kingdom
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-traveler-with-a-suitcase mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        London (and vicinity), England, United Kingdom
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
-                                <div class="search-result-item">
-                                    <div>
-                                        <i class="flaticon-airplane-flight mr-2 small-icon"></i>
-                                    </div>
-                                    <div class="title">
-                                        London (and vicinity), England, United Kingdom
-                                    </div>
-                                    <!-- /.title -->
-                                </div>
-                                <!-- /.search-result-item -->
+                                @if(count($locations) > 0)
+                                    @foreach($locations as $item)
+                                        <div class="search-result-item">
+                                            <div>
+                                                <i class="flaticon-map-marker mr-2 small-icon"></i>
+                                            </div>
+                                            <div class="title">
+                                                {{$item->name}}
+                                            </div>
+                                            <!-- /.title -->
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <!-- /.result-list -->
                         </div>

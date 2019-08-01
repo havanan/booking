@@ -10,6 +10,16 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
+                        <img id="holder">
+                        <br>
+                        <span class="input-group-btn">
+                                        <a data-input="thumbnail" data-preview="holder" class="btn btn-info text-white" id="upload-avatar">
+                                            <i class="fa fa-picture-o"></i> Chọn ảnh bìa
+                                        </a>
+                                    </span>
+                        <input id="thumbnail" class="form-control file-upload" type="text" name="avatar">
+                    </div>
+                    <div class="form-group">
                         <label for="recipient-name" class="control-label">Tên:</label>
                         <input type="text" class="form-control" required name="name">
                     </div>
