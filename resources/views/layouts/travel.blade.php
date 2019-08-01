@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="{{asset('/')}}assets/vendors/ion.rangeslider/css/ion.rangeSlider.css"/>
     <link rel="stylesheet" href="{{asset('/')}}assets/vendors/ion.rangeslider/css/ion.rangeSlider.skinFlat.css"/>
     <link rel="stylesheet" href="{{asset('/')}}assets/vendors/icheck/skins/square/aero.css"/>
-
     <!-- :::::-[ Travelgo - Travel and Tours listings HTML template StyleSheet ]-:::::: -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css"/>
     @yield('css')
@@ -76,14 +75,14 @@
                             <div class="row">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <div class=" btn btn-outline-secondary no-round btn-block btn-lg">
-                                        <img src="assets/icons/facebook-icon.svg" alt="google icon" class="icon mr-2"/> Facebook
+                                        <img src="{{asset('/')}}/assets/icons/facebook-icon.svg" alt="google icon" class="icon mr-2"/> Facebook
                                     </div>
                                     <!-- /.btn btn-primary -->
                                 </div>
                                 <!-- /.col-md-6 col-lg-6 col-sm-12 -->
                                 <div class="col-md-6 col-lg-6 col-sm-12 mt-2 mt-lg-0 mt-sm-0">
                                     <div class=" btn btn-outline-secondary no-round btn-block btn-lg d-flex align-items-center justify-content-center">
-                                        <img src="assets/icons/google-pluse-icon.svg" alt="google icon" class="icon mr-2"/> Google
+                                        <img src="{{asset('/')}}/assets/icons/google-pluse-icon.svg" alt="google icon" class="icon mr-2"/> Google
                                     </div>
                                     <!-- /.btn btn-primary -->
                                 </div>
@@ -156,14 +155,14 @@
                             <div class="row">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <div class=" btn btn-outline-secondary no-round btn-block btn-lg">
-                                        <img src="assets/icons/facebook-icon.svg" alt="google icon" class="icon mr-2"/> Facebook
+                                        <img src="{{asset('/')}}/assets/icons/facebook-icon.svg" alt="google icon" class="icon mr-2"/> Facebook
                                     </div>
                                     <!-- /.btn btn-primary -->
                                 </div>
                                 <!-- /.col-md-6 col-lg-6 col-sm-12 -->
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <div class=" btn btn-outline-secondary no-round btn-block btn-lg">
-                                        <img src="assets/icons/google-pluse-icon.svg" alt="google icon" class="icon mr-2"/> Google
+                                        <img src="{{asset('/')}}/assets/icons/google-pluse-icon.svg" alt="google icon" class="icon mr-2"/> Google
                                     </div>
                                     <!-- /.btn btn-primary -->
                                 </div>

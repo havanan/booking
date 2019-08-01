@@ -19,11 +19,8 @@
                 <div class="descrtiption">
                     @if($item->price > 0 && $item->price_discount <= 0)
                         <span class="text-danger">{{number_format($item->price)}} vnđ</span>
-                    @elseif($item->price_discount > 0)
-                        <span class="text-danger">{{number_format($item->price_discount)}} vnđ</span>
                     @else
-                        <span class="text-danger">Liên hệ</span>
-
+                        <span class="text-danger">{{number_format($item->price_discount)}} vnđ</span>
                     @endif
                     <span class="review-star-rate small">
                                                 <span class="rate full"><i class="fa fa-star"></i></span>

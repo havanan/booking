@@ -140,10 +140,7 @@
     // Price Silder //
     function priceSlider() {
         $(".price-slider").ionRangeSlider({
-            min: 130,
-            max: 575,
             type: 'double',
-            prefix: "$",
             prettify: false,
             hasGrid: true
         });

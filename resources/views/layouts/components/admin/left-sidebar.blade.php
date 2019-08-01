@@ -14,12 +14,13 @@
                     <li> <a class="waves-effect waves-dark" href="{{route('admin.tour_categories.index')}}" aria-expanded="false"><i class=" icon-directions"></i><span class="hide-menu">Loại Tour</span></a></li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-map"></i><span class="hide-menu">Tour</span></a>
                         <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{route('admin.tour.create')}}">Tạo mới</a></li>
                             <li><a href="{{route('admin.tour.index')}}">Danh sách</a></li>
-                            <li><a href="{{route('admin.price.index')}}">Bảng giá</a></li>
                         </ul>
                     </li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-compass"></i><span class="hide-menu">Booking</span></a>
                         <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{route('admin.booking.create')}}">Tạo mới</a></li>
                             <li><a href="{{route('admin.booking.index')}}">Danh sách</a></li>
                         </ul>
                     </li>

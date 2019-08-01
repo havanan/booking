@@ -12,8 +12,9 @@
 */
 
 
-Route::namespace('Frontend')->group(function () {
+Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+
 
     Route::get('dashboard', 'DashboardController@index')->name('admin.index');
 
@@ -35,6 +36,11 @@ Route::namespace('Frontend')->group(function () {
 
     Route::prefix('posts')->group(function () {
         Route::get('/', 'PostsController@index')->name('post.index');
+        Route::get('get-all-category', 'PostsController@getAllCat')->name('post.get_all_cat');
+        Route::get('get-by-category/{slug}', 'PostsController@getByCat')->name('post.get_by_cat');
+
+        Route::get('/', 'PostsController@index')->name('post.index');
+
         Route::get('view/{slug}', 'PostsController@view')->name('post.view');
 
     });
@@ -46,6 +52,11 @@ Route::namespace('Frontend')->group(function () {
     Route::prefix('tours')->group(function () {
         Route::get('/', 'ToursController@index')->name('tour.index');
         Route::get('view/{slug}', 'ToursController@view')->name('tour.view');
+        Route::get('book/{slug}', 'ToursController@book')->name('tour.book');
+        Route::get('get-by-category/{slug}', 'ToursController@getByCat')->name('tour.get_by_cat');
+        Route::get('find', 'ToursController@find')->name('tour.find');
+
+
     });
 
     Route::prefix('tour-categories')->group(function () {
@@ -62,6 +73,8 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('bookings')->group(function () {
         Route::get('/', 'BookingsController@index')->name('admin.booking.index');
+        Route::get('create', 'BookingsController@create')->name('admin.booking.create');
+
     });
 
     Route::prefix('categories')->group(function () {
@@ -131,6 +144,8 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
         Route::get('destroy/{id}', 'UsersController@destroy')->name('admin.user.destroy');
         Route::get('my-profile', 'UsersController@myProfile')->name('admin.user.my_profile');
         Route::get('pw-default/{id}', 'CustomersController@pwDefault')->name('admin.customer.pw_default');
+        Route::post('update-password', 'UsersController@updatePassword')->name('admin.user.update_password');
+        Route::post('update-avatar', 'UsersController@updateAvatar')->name('admin.user.update_avatar');
 
 
     });

@@ -35,7 +35,7 @@
                     Reviews by
                 </div>
                 <!-- /.small mb-1 -->
-                <img src="assets/icons/TA_logo_primary.svg" alt="" height="25">
+                <img src="{{asset('/')}}assets/icons/TA_logo_primary.svg" alt="" height="25">
 
             </div>
             <!-- /.col-lg-3 col-md-3 col-sm-12 -->
@@ -78,15 +78,15 @@
                             <!-- /.title -->
                             <div class="stores">
                                 <div class="store">
-                                    <img src="assets/icons/apple-icon.svg" alt="image alt"/>
+                                    <img src="{{asset('/')}}assets/icons/apple-icon.svg" alt="image alt"/>
                                 </div>
                                 <!-- /.store -->
                                 <div class="store">
-                                    <img src="assets/icons/google-play.svg" alt="image alt"/>
+                                    <img src="{{asset('/')}}assets/icons/google-play.svg" alt="image alt"/>
                                 </div>
                                 <!-- /.store -->
                                 <div class="store">
-                                    <img src="assets/icons/window.svg" alt="image alt"/>
+                                    <img src="{{asset('/')}}assets/icons/window.svg" alt="image alt"/>
                                 </div>
                                 <!-- /.store -->
                             </div>
@@ -103,11 +103,11 @@
                             <!-- /.title -->
                             <div class="payments">
                                 <div class="payment">
-                                    <img src="assets/icons/payment-visa.svg" alt="payment icon"/>
+                                    <img src="{{asset('/')}}assets/icons/payment-visa.svg" alt="payment icon"/>
                                 </div>
                                 <!-- /.payment -->
                                 <div class="payment">
-                                    <img src="assets/icons/payment-mastercard.svg" alt="payment icon"/>
+                                    <img src="{{asset('/')}}assets/icons/payment-mastercard.svg" alt="payment icon"/>
                                 </div>
                                 <!-- /.payment -->
                             </div>

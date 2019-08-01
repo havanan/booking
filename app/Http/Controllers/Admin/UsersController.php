@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UsersController extends Controller
@@ -110,5 +111,45 @@ class UsersController extends Controller
     public function myProfile()
     {
         return view('admin.users.my_profile');
+    }
+    public function updatePassword(Request $request){
+        $id = $request->id;
+        $info = User::findOrFail($id);
+        if ($request->new_password != $request->password_check){
+            $status = 'error';
+            $message = 'Xác thực mật khẩu mới không đúng, vui lòng nhập lại';
+            return back()->with($status,$message);
+        }
+        if (Hash::check($request->password, $info['password'])) {
+
+            $info->fill([
+            'password' => Hash::make($request->new_password)
+        ])->save();
+
+        $request->session()->flash('success', 'Đổi mật khẩu thành công');
+        return back();
+
+        } else {
+            $request->session()->flash('error', 'Mật khẩu cũ không đúng');
+            return back();
+        }
+
+    }
+    public function updateAvatar(Request $request){
+        $id = $request->id;
+        $info = User::findOrFail($id);
+        if ($request->avatar != null){
+            $info->avatar = $request->avatar;
+            if ($info->save()){
+                $status = 'success';
+                $message = 'Cập nhật thành công';
+            }else{
+                $status = 'error';
+                $message = 'Cập nhật thất bại';
+            }
+            $request->session()->flash($status, $message);
+        }
+
+        return back();
     }
 }
