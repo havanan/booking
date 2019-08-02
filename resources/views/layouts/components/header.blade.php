@@ -29,14 +29,10 @@
                         </div>
                         <!-- /.dropdown-menu -->
                     </li>
-                    <li class="nav-item  py-md-2">
-                        <a href="index.html" class="nav-link ">Combo tiết kiệm</a>
-                        <!-- /.nav-link -->
-                    </li>
                     <!-- /.nav-item py-md-2 -->
                     <!-- /.nav-item py-md-2 -->
                     <li class="nav-item  py-md-2">
-                        <a href="index.html" class="nav-link ">Liên hệ</a>
+                        <a href="{{route('contact-us')}}" class="nav-link ">Liên hệ</a>
                         <!-- /.nav-link -->
                     </li>
                     <!-- /.nav-item py-md-2 -->

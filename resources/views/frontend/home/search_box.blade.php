@@ -11,7 +11,7 @@
                         </div>
                         <form method="get" action="{{route('tour.find_by_location')}}" id="searchLocation">
                             <!-- /.search-icon -->
-                            <input type="text" class="search-input" placeholder='Quốc gia, thành phố, địa điểm du lịch' name="location_name"/>
+                            <input type="text" class="search-input" placeholder='Địa điểm du lịch' name="location_name"/>
                         </form>
                         <!-- /.search-input -->
                         <div class="search-result-drop-down">

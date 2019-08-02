@@ -14,12 +14,17 @@
 
 Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('lien-he', function (){
+        return view('frontend.home.contact_us');
+    })->name('contact-us');
+
     Route::get('tim-kiem-theo-dia-danh', 'ToursController@findByLocation')->name('tour.find_by_location');
 
     Route::get('dashboard', 'DashboardController@index')->name('admin.index');
 
-    Route::prefix('bookings')->group(function () {
+    Route::prefix('booking')->group(function () {
         Route::get('/', 'BookingsController@index')->name('booking.index');
+        Route::get('chi-tiet-don-hang/BK-{id}', 'BookingsController@getBookingInfo')->name('booking.get_booking_info');
     });
 
     Route::prefix('categories')->group(function () {

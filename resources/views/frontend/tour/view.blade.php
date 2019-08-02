@@ -7,6 +7,9 @@
             <div class="row">
                 <div class="col-lg-7 col-md-9 col-sm-12">
                     <div class="mt-2 mb-3">
+                        @if($info['avatar'] != null)
+                        <img src="{{asset('/').'/'.$info['avatar']}}" style="width: 100%">
+                        @endif
                         <h2 class="mb-2">{{$info['name']}}</h2>
                         <p>{{$info->location->name}}</p>
                     </div>

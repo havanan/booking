@@ -39,6 +39,11 @@
                                             </span>
                     <!-- /.review-starts-list small -->
                 </div>
+                <div>
+                    <a class="btn btn-lg btn-book-now btn-block text-white" href="{{route('tour.book',$item->slug)}}">
+                        Đặt Ngay
+                    </a>
+                </div>
                 <!-- /.descrtiption -->
             </div>
             <!-- /.info -->

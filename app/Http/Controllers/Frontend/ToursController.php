@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Model\Booking;
+use App\Model\Customer;
 use App\Model\Location;
 use App\Model\Service;
 use App\Model\Tour;
 use App\Model\TourCategory;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ToursController extends Controller
 {
+    //lấy tour theo category
    public function getByCat($slug){
-       $info = TourCategory::where('slug','like','%'.$slug.'%')->first();
+       $info = $this->findBySlug($slug);
        $tour_category_id = null;
        if (!empty($info)){
 
@@ -25,6 +31,7 @@ class ToursController extends Controller
        $data = $this->getTour($params);
        return view('frontend.tour.index',compact('data','info'));
    }
+    //hàm tìm kiếm tour
     public function getTour($params)
     {
         $data =  Tour::orderBy('id','desc');
@@ -68,6 +75,7 @@ class ToursController extends Controller
 
         return$data;
     }
+    //tìm kiếm tour
     public function find(Request $request){
         $services_selected= array();
         $params = $request->only('name','tour_category_id');
@@ -89,6 +97,7 @@ class ToursController extends Controller
         return view('frontend.tour.index',compact('data','info','params','services_selected'));
 
     }
+    //tìm tour theo địa điểm
     public function findByLocation(Request $request){
         $params = array();
         $services_selected = array();
@@ -104,14 +113,113 @@ class ToursController extends Controller
 
     }
     public function view($slug){
-       $info = Tour::where('slug','like','%'.$slug.'%')->first();
+       $info = $this->findBySlug($slug);
         return view('frontend.tour.view',compact('info'));
     }
     public function book($slug){
-        $info = Tour::where('slug','like','%'.$slug.'%')->first();
+        $info = $this->findBySlug($slug);
         return view('frontend.tour.book',compact('info'));
     }
+    // tính tổng tiền tour
+    public function getTotalPrice($input_price){
+        $price = $this->getPriceCustomer($input_price);
+        $price_children = $input_price['price_children'];
+        $price_baby = $input_price['price_baby'];
+
+        $total = $price*$input_price['customer'] + $price_children*$input_price['children'] + $price_baby*$input_price['baby'];
+        return $total;
+
+    }
+    //lấy giá tiền của người lớn
+    public function getPriceCustomer($input_price){
+        $price = $input_price['price'];
+        $price_discount = $input_price['price_discount'];
+
+        if ($price_discount <= 0){
+            return $price;
+        }else{
+            return $price_discount;
+        }
+
+    }
+    //đặt tour
     public function booking(Request $request,$slug){
-        dd($request->all(),$slug);
+        $params = $request->only('name','email','phone','address','customer','children','baby','note');
+        $input_customer = $request->only('name','email','phone','address');
+        $input_price = $request->only('customer','children','baby');
+        // lấy thông tin tour
+        $tour_info = $this->findBySlug($slug);
+        //check info tour
+        if (empty($tour_info)){
+            $status = 'error';
+            $message = 'Không tìm thấy thông tin tour';
+            return back()->with($status,$message);
+        }
+        DB::beginTransaction();
+        //lấy thông tin nhân viên tạo tour
+        $user_id = isset(Auth::user()->id) ? Auth::user()->id : null;
+        //gán thông tin giá vào mảng tính tiền tour
+        $input_price['price']=$tour_info['price'];
+        $input_price['price_discount']=$tour_info['price_discount'];
+        $input_price['price_children']=$tour_info['price_children'];
+        $input_price['price_baby']=$tour_info['price_baby'];
+        //tính tổng thành viên
+        $amount = $params['customer'] + $params['children'] + $params['baby'];
+        //tính tổng tiền
+        $total_price = $this->getTotalPrice($input_price);
+        try {
+            //tạo khách hàng
+            $customer = $this->createCustomer($input_customer);
+            $customer_id = $customer['id'];
+            $booking_date = Carbon::now()->format('Y-m-d');
+            $start_date = date('Y-m-d',strtotime($request->start_date));
+            //gán thông tin cần cho tạo booking
+            $input_booking = $this->makeInputBooking($tour_info['id'],$customer_id,$user_id,0,$amount,$booking_date,$start_date,$total_price,0,$params['note'],json_encode($input_price));
+            //tạo booking
+            $booking = $this->createBooking($input_booking);
+            $booking_id = $booking['id'];
+            //lưu vào db
+            DB::commit();
+
+            return redirect()->route('booking.get_booking_info',$booking_id);
+        } catch (\Exception $e) {
+
+            //xóa hết thông tin booking vừa tạo
+            DB::rollback();
+            $status = 'error';
+            $message = 'Đặt tour không thành công, vui lòng kiểm tra lại thông tin';
+            return back()->with($status,$message);
+
+        }
+    }
+    public function makeInputBooking($tour_id,$customer_id,$user_id,$status,$amount,$booking_date,$start_date,$total_price,$discount,$note,$log){
+       $input_booking = array();
+        $input_booking['tour_id'] = $tour_id;
+        $input_booking['customer_id'] = $customer_id;
+        $input_booking['user_id'] = $user_id;
+        $input_booking['status'] = $status;
+        $input_booking['amount'] = $amount;
+        $input_booking['booking_date'] = $booking_date;
+        $input_booking['start_date'] = $start_date;
+        $input_booking['total_price'] = $total_price;
+        $input_booking['discount'] = $discount;
+        $input_booking['note'] = $note;
+        $input_booking['log'] = $log;
+        return $input_booking;
+    }
+    public function createCustomer($params){
+        $customer = Customer::where('email',$params['email'])->updateOrCreate($params);
+        return $customer;
+    }
+    public function createBooking($params){
+        if (empty($params)){
+            return false;
+        }
+        $booking = Booking::create($params);
+        return $booking;
+    }
+    public function findBySlug($slug){
+        $info = Tour::where('slug','like','%'.$slug.'%')->first();
+        return $info;
     }
 }
