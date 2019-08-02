@@ -23,7 +23,9 @@
                 <h3 class="heading">Tour {{$info['name']}}</h3>
                 <p>Vui lòng cung cấp đầy đủ thông tin để hoàn tất đặt tour</p>
             </div>
-            @include('layouts.components.notification')
+            <div class="text-center">
+                @include('layouts.components.notification')
+            </div>
             <form class="form-register" action="#" method="post" id="frmBooking">
                 @csrf
                 <div id="form-total">

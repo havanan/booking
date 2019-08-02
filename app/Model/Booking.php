@@ -15,7 +15,7 @@ class Booking extends Model
     }
     public function customer()
     {
-        return $this->belongsTo(Customer::class,'customer_id')->select('name','id','avatar','status');
+        return $this->belongsTo(Customer::class,'customer_id')->select('name','id','avatar','status','address','phone','email');
     }
     public function tour()
     {

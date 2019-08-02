@@ -81,6 +81,12 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
     Route::prefix('bookings')->group(function () {
         Route::get('/', 'BookingsController@index')->name('admin.booking.index');
         Route::get('create', 'BookingsController@create')->name('admin.booking.create');
+        Route::post('store', 'BookingsController@store')->name('admin.booking.store');
+        Route::get('show/{id}', 'BookingsController@show')->name('admin.booking.show');
+        Route::get('edit/{id}', 'BookingsController@edit')->name('admin.booking.edit');
+        Route::post('update/{id}', 'BookingsController@update')->name('admin.booking.update');
+        Route::get('destroy/{id}', 'BookingsController@destroy')->name('admin.booking.destroy');
+        Route::get('change-status/status={status}/id={id}', 'BookingsController@changeStatus')->name('admin.booking.change_status');
 
     });
 

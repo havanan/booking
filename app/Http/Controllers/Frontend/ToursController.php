@@ -121,7 +121,7 @@ class ToursController extends Controller
         return view('frontend.tour.book',compact('info'));
     }
     // tính tổng tiền tour
-    public function getTotalPrice($input_price){
+    public function chargeTotalPriceTour(array $input_price){
         $price = $this->getPriceCustomer($input_price);
         $price_children = $input_price['price_children'];
         $price_baby = $input_price['price_baby'];
@@ -131,7 +131,7 @@ class ToursController extends Controller
 
     }
     //lấy giá tiền của người lớn
-    public function getPriceCustomer($input_price){
+    public function getPriceCustomer(array $input_price){
         $price = $input_price['price'];
         $price_discount = $input_price['price_discount'];
 
@@ -142,11 +142,21 @@ class ToursController extends Controller
         }
 
     }
+    //lấy dịch vụ theo slug
+    public function getServiceBySlug(array $slugs){
+       $data = Service::whereIn('slug',$slugs)->get();
+       return $data;
+    }
+    //tính giá dịch vụ theo tour
+    public function chargePriceService($slugs){
+        $data = Service::whereIn('slug',$slugs)->pluck('price','name');
+        return $data;
+    }
     //đặt tour
     public function booking(Request $request,$slug){
         $params = $request->only('name','email','phone','address','customer','children','baby','note');
         $input_customer = $request->only('name','email','phone','address');
-        $input_price = $request->only('customer','children','baby');
+        $input_price['tour'] = $request->only('customer','children','baby');
         // lấy thông tin tour
         $tour_info = $this->findBySlug($slug);
         //check info tour
@@ -155,18 +165,26 @@ class ToursController extends Controller
             $message = 'Không tìm thấy thông tin tour';
             return back()->with($status,$message);
         }
+        $tour_services = json_decode($tour_info['service']);
+        //lấy thông tin service theo slug
+        $services = $this->chargePriceService($tour_services);
+        //tổng tiền service
+        $service_price = $services->sum();
+
         DB::beginTransaction();
         //lấy thông tin nhân viên tạo tour
         $user_id = isset(Auth::user()->id) ? Auth::user()->id : null;
         //gán thông tin giá vào mảng tính tiền tour
-        $input_price['price']=$tour_info['price'];
-        $input_price['price_discount']=$tour_info['price_discount'];
-        $input_price['price_children']=$tour_info['price_children'];
-        $input_price['price_baby']=$tour_info['price_baby'];
+        $input_price['tour']['price']=$tour_info['price'];
+        $input_price['tour']['price_discount']=$tour_info['price_discount'];
+        $input_price['tour']['price_children']=$tour_info['price_children'];
+        $input_price['tour']['price_baby']=$tour_info['price_baby'];
+        $input_price['service'] = $services->toArray();
         //tính tổng thành viên
         $amount = $params['customer'] + $params['children'] + $params['baby'];
-        //tính tổng tiền
-        $total_price = $this->getTotalPrice($input_price);
+        //tính tổng tiền tour
+        $tour_price = $this->chargeTotalPriceTour($input_price['tour']);
+        $total_price = $tour_price + $service_price;
         try {
             //tạo khách hàng
             $customer = $this->createCustomer($input_customer);
@@ -183,7 +201,7 @@ class ToursController extends Controller
 
             return redirect()->route('booking.get_booking_info',$booking_id);
         } catch (\Exception $e) {
-
+            dd($e);
             //xóa hết thông tin booking vừa tạo
             DB::rollback();
             $status = 'error';

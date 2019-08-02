@@ -178,7 +178,6 @@ class ToursController extends Controller
             return redirect()->route('admin.tour.index')->with($status,$message);
             // all good
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             $status = 'error';
             $message = 'Sửa thất bại';
