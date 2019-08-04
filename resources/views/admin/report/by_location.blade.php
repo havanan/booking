@@ -2,81 +2,12 @@
 @section('title') Báo Cáo Theo Địa Diểm Du Lịch @endsection
 @section('breadcrumb') Báo cáo theo địa điểm du lịch @endsection
 @section('js')
+    <script src="{{asset('js/c3-chart-init.js')}}"></script>
 <script>
-    var chart = c3.generate({
-        bindto: '#income',
-        data: {
-            columns: <?php echo $dataTourLocation ?>,
-            type: 'bar'
-        },
-        bar: {
-            space: 0.2,
-            // or
-        },
-        resize: true
-    });
-    var chart = c3.generate({
-        bindto: '#post-bar',
-        data: {
-            columns: <?php echo $dataPostLocation ?>,
-            type: 'bar'
-        },
-        bar: {
-            space: 0.2,
-            // or
-        },
-        resize: true
-    });
-    var chart = c3.generate({
-        bindto: '#visitor',
-        data: {
-            columns: <?php echo $dataTourLocation ?>,
-
-            type: 'donut',
-            onclick: function(d, i) { console.log("onclick", d, i); },
-            onmouseover: function(d, i) { console.log("onmouseover", d, i); },
-            onmouseout: function(d, i) { console.log("onmouseout", d, i); }
-        },
-        donut: {
-            label: {
-                show: false
-            },
-            title: "Hiển thị theo %",
-            width: 30,
-
-        },
-
-        legend: {
-            hide: true
-            //or hide: 'data1'
-            //or hide: ['data1', 'data2']
-        },
-    });
-    var chart = c3.generate({
-        bindto: '#post-donut',
-        data: {
-            columns: <?php echo $dataPostLocation ?>,
-
-            type: 'donut',
-            onclick: function(d, i) { console.log("onclick", d, i); },
-            onmouseover: function(d, i) { console.log("onmouseover", d, i); },
-            onmouseout: function(d, i) { console.log("onmouseout", d, i); }
-        },
-        donut: {
-            label: {
-                show: false
-            },
-            title: "Hiển thị theo %",
-            width: 30,
-
-        },
-
-        legend: {
-            hide: true
-            //or hide: 'data1'
-            //or hide: ['data1', 'data2']
-        },
-    });
+    makeBarchar('income',<?php echo $dataTourLocation ?>)
+    makeBarchar('post-bar',<?php echo $dataPostLocation ?>)
+    makeDonutChar('visitor',<?php echo $dataTourLocation ?>)
+    makeDonutChar('post-donut',<?php echo $dataPostLocation ?>)
 </script>
 @endsection
 @section('content')
