@@ -158,7 +158,7 @@
                                                 <div class="col-md-2">
                                                     <div class="custom-control custom-radio">
                                                         <input type="checkbox" id="chk-{{$item->slug}}" name="service[]" class="custom-control-input" value="{{$item->slug}}" checked>
-                                                        <label class="custom-control-label" for="chk-{{$item->slug}}"><i class="{{$item->icon}}"></i> {{$item->name}}</label>
+                                                        <label class="custom-control-label" for="chk-{{$item->slug}}"><i class="fa {{$item->icon}}"></i> {{$item->name}}</label>
                                                     </div>
                                                 </div>
                                             @endforeach

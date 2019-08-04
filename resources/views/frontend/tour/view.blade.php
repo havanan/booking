@@ -20,33 +20,14 @@
                     </div>
                     <h4 class="mt-4 mb-3">Dịch Vụ Đi Kèm</h4>
                     <div class="row mt20">
-                        <div class="col-md-6">
-                            <div class="hotel-facilities"><i class="flaticon-wifi"></i> Wi-Fi Internet</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-car-parking"></i> Parking</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-departures"></i> Airport Transport
-                            </div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-bus"></i> Shuttle Bus Service</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-weightlifting"></i> Fitness Center
-                            </div>
-                            <!-- /.hotel-facilities -->
-                        </div>
-                        <div class="col-md-6">
-                            <div class="hotel-facilities"><i class="flaticon-swim"></i> Pool</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-spa"></i> SPA</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-tray"></i> Restaurant</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-supper"></i>Wheelchair Access</div>
-                            <!-- /.hotel-facilities -->
-                            <div class="hotel-facilities"><i class="flaticon-portfolio"></i> Business Center
-                            </div>
-                            <!-- /.hotel-facilities -->
-                        </div>
+                        @if(count($services) > 0)
+                            @foreach($services as $item)
+                                <div class="col-md-6">
+                                    <div class="hotel-facilities"><i class="fa {{$item->icon}}"></i> {{$item->name}}</div>
+                                    <!-- /.hotel-facilities -->
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <!-- /.col-lg-7 col-md-9 col-sm-12 -->
@@ -67,19 +48,25 @@
                                     <del>{{number_format($info['price'])}} VNĐ</del>
                                     @endif
                                     <span class="review-star-rate ">
-                    <span class="rate full"><i class="fa fa-star"></i></span>
-                                        <!-- /.rate fa-star-o -->
-                    <span class="rate full"><i class="fa fa-star"></i></span>
-                                        <!-- /.rate fa-star-o -->
-                    <span class="rate full"><i class="fa fa-star"></i></span>
-                                        <!-- /.rate fa-star-o -->
-                    <span class="rate full"><i class="fa fa-star"></i></span>
-                                        <!-- /.rate fa-star-o -->
-                    <span class="rate full"><i class="fa fa-star"></i></span>
-                                        <!-- /.rate fa-star-o -->
-                    </span>
+                                    <span class="rate full"><i class="fa fa-star"></i></span>
+                                                        <!-- /.rate fa-star-o -->
+                                    <span class="rate full"><i class="fa fa-star"></i></span>
+                                                        <!-- /.rate fa-star-o -->
+                                    <span class="rate full"><i class="fa fa-star"></i></span>
+                                                        <!-- /.rate fa-star-o -->
+                                    <span class="rate full"><i class="fa fa-star"></i></span>
+                                                        <!-- /.rate fa-star-o -->
+                                    <span class="rate full"><i class="fa fa-star"></i></span>
+                                                        <!-- /.rate fa-star-o -->
+                                    </span>
                                     <!-- /.review-starts-list  -->
                                 </div>
+                                    <div class="mt-2 mb-2">
+                                        <span>Phương tiện: </span>
+                                        <strong>{{isset($vehicle_seleced['car'])   ? 'Ô tô,' : ''}}</strong>
+                                        <strong>{{isset($vehicle_seleced['plane'])   ? 'Máy bay,' : ''}}</strong>
+                                        <strong>{{isset($vehicle_seleced['train'])   ? 'Tàu hỏa' : ''}}</strong>
+                                    </div>
                                 <hr data-title="Đặt Tour" class="mt-4 mb-4"/>
                                 <a class="btn btn-lg btn-book-now btn-block text-white" href="{{route('tour.book',$info['slug'])}}">
                                    Đặt Ngay

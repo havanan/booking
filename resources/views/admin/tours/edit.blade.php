@@ -167,7 +167,7 @@
                                                                value="{{$item->slug}}"
                                                                 {{isset($services_seleced[$item->slug]) ? 'checked' : ''}}>
                                                         <label class="custom-control-label" for="chk-{{$item->slug}}">
-                                                            <i class="{{$item->icon}}"></i> {{$item->name}}
+                                                            <i class="fa {{$item->icon}}"></i> {{$item->name}}
                                                         </label>
                                                     </div>
                                                 </div>

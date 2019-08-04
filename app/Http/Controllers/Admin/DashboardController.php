@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Booking;
+use App\Model\Customer;
+use App\Model\Post;
+use App\Model\Tour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +18,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        $price_total = Booking::where('status',1)->sum('total_price');
+        $customer_total = Customer::where('status',1)->count();
+        $tour_total = Tour::where('status',1)->count();
+        $blog_total = Post::where('status',1)->count();
+        $data = Booking::orderBy('id','desc')->where('status',0)->get();
+//        dd($data[0]);
+        return view('admin.dashboard.index',compact('price_total','customer_total','tour_total','blog_total','data'));
     }
 
     /**

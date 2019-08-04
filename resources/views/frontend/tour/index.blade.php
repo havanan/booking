@@ -115,8 +115,9 @@
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-12">
+                            @if(count($data) > 0)
                             {{ $data->links() }}
-
+                            @endif
                             {{--<nav aria-label="pagination">--}}
                                 {{--<ul class="pagination">--}}
                                     {{--<li class="page-item active"><a class="page-link" href="#">1</a></li>--}}

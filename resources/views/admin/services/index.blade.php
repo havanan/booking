@@ -41,7 +41,7 @@
                                        <td class="text-center">{{$key +1}}</td>
                                        <td class="text-center">DV-{{$item->id}}</td>
                                        <td class="text-center">
-                                           <i class="{{$item->icon}}"></i>
+                                           <i class="fa {{$item->icon}}"></i>
                                        </td>
                                        <td><strong>{{$item->name}}</strong></td>
                                        <td class="text-center">

@@ -30,6 +30,10 @@
                         <!-- /.dropdown-menu -->
                     </li>
                     <!-- /.nav-item py-md-2 -->
+                    <li class="nav-item  py-md-2">
+                        <a href="{{route('post.get_all_cat')}}" class="nav-link ">Blog</a>
+                        <!-- /.nav-link -->
+                    </li>
                     <!-- /.nav-item py-md-2 -->
                     <li class="nav-item  py-md-2">
                         <a href="{{route('contact-us')}}" class="nav-link ">Liên hệ</a>

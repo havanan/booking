@@ -41,14 +41,12 @@ Route::namespace('Frontend')->middleware(['frontend'])->group(function () {
 
     });
 
-    Route::prefix('posts')->group(function () {
+    Route::prefix('bai-viet')->group(function () {
         Route::get('/', 'PostsController@index')->name('post.index');
-        Route::get('get-all-category', 'PostsController@getAllCat')->name('post.get_all_cat');
+        Route::get('tat-ca-bai-viet', 'PostsController@getAllCat')->name('post.get_all_cat');
         Route::get('/{slug}', 'PostsController@getByCat')->name('post.get_by_cat');
-
         Route::get('/', 'PostsController@index')->name('post.index');
-
-        Route::get('chi-tiet-bai-viet/{slug}', 'PostsController@view')->name('post.view');
+        Route::get('chi-tiet/{slug}', 'PostsController@view')->name('post.view');
 
     });
 
@@ -84,10 +82,9 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
         Route::post('store', 'BookingsController@store')->name('admin.booking.store');
         Route::get('show/{id}', 'BookingsController@show')->name('admin.booking.show');
         Route::get('edit/{id}', 'BookingsController@edit')->name('admin.booking.edit');
-        Route::post('update/{id}', 'BookingsController@update')->name('admin.booking.update');
         Route::get('destroy/{id}', 'BookingsController@destroy')->name('admin.booking.destroy');
         Route::get('change-status/status={status}/id={id}', 'BookingsController@changeStatus')->name('admin.booking.change_status');
-
+        Route::post('update/{id}', 'BookingsController@update')->name('admin.booking.update');
     });
 
     Route::prefix('categories')->group(function () {
@@ -124,6 +121,8 @@ Route::namespace('Admin')->middleware(['auth'])->prefix('admin')->group(function
 
     Route::prefix('reports')->group(function () {
         Route::get('/', 'ReportsController@index')->name('admin.report.index');
+        Route::get('by-location', 'ReportsController@byLocation')->name('admin.report.byLocation');
+
     });
 
     Route::prefix('services')->group(function () {

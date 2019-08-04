@@ -77,7 +77,9 @@ class BookingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
+        $info = Booking::findOrFail($id);
+
     }
 
     /**
@@ -88,7 +90,7 @@ class BookingsController extends Controller
      */
     public function changeStatus($status,$id)
     {
-        if (!in_array($status,[0,1])){
+        if (!in_array($status,[0,1,2])){
             $status = 'error';
             $message = 'Tạo thất bại';
             return back()->with($status,$message);

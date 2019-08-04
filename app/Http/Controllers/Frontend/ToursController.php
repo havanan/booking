@@ -114,7 +114,23 @@ class ToursController extends Controller
     }
     public function view($slug){
        $info = $this->findBySlug($slug);
-        return view('frontend.tour.view',compact('info'));
+        $services_seleced = array();
+        $vehicle_seleced = array();
+
+        $vehicle = json_decode($info['vehicle']);
+        $services = json_decode($info['service']);
+
+        if ($vehicle != null){
+            $vehicle_seleced = array_flip($vehicle);
+
+        }
+        if ($services != null){
+            $services_seleced = array_flip($services);
+
+        }
+        $services = Service::where('status',1)->get();
+
+        return view('frontend.tour.view',compact('info','services_seleced','vehicle_seleced','services'));
     }
     public function book($slug){
         $info = $this->findBySlug($slug);
@@ -226,7 +242,7 @@ class ToursController extends Controller
         return $input_booking;
     }
     public function createCustomer($params){
-        $customer = Customer::where('email',$params['email'])->updateOrCreate($params);
+        $customer = Customer::updateOrCreate(['email'=>$params['email']],$params);
         return $customer;
     }
     public function createBooking($params){
@@ -240,4 +256,5 @@ class ToursController extends Controller
         $info = Tour::where('slug','like','%'.$slug.'%')->first();
         return $info;
     }
+
 }

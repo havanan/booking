@@ -2,84 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Booking;
+use App\Model\Post;
+use App\Model\Tour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ReportsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function byLocation(){
+        $topTourLocation = Tour::with(['location'])
+            ->groupBy('location_id')
+            ->select('location_id')
+            ->selectRaw('Count(id) as total')
+            ->get();
+        $dataTourLocation = $this->makeBarChar($topTourLocation);
+        $topPostLocation = Post::with(['location'])
+            ->groupBy('location_id')
+            ->select('location_id')
+            ->selectRaw('Count(id) as total')
+            ->get();
+        $dataPostLocation = $this->makeBarChar($topPostLocation);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.report.by_location',compact('dataTourLocation','dataPostLocation'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function makeBarChar($input){
+        $data = array();
+        if (!empty($input)){
+            foreach ($input as $key => $item){
+                $data[$key][0] = $item->location != null ? $item->location->name : 'khác-'.$key;
+                $data[$key][1] = (float)$item->total;
+            }
+        }
+        $data = json_encode($data);
+        return $data;
     }
 }

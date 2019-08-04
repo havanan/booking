@@ -15,8 +15,10 @@
                         Booking -
                         @if($info['status'] == 1)
                             <span class="text-success">Đã kích hoạt</span>
+                        @elseif($info['status'] == 2)
+                            <span class="text-danger">Đã hủy</span>
                         @else
-                            <span class="text-success">Đã kích hoạt</span>
+                            <span class="text-warning">Đã kích hoạt</span>
                         @endif
 
                     </b>
@@ -38,8 +40,8 @@
                                     <h3>Thông tin tour</h3>
                                     <p><b>Ngày đặt tour :</b><br> <i class="fa fa-calendar"></i> {{date('d/m/Y',strtotime($info['booking_date']))}}</p>
                                     <p><b>Ngày khởi hành :</b><br> <i class="fa fa-calendar"></i> {{date('d/m/Y',strtotime($info['start_date']))}}</p>
+                                    <p><b>Địa điểm khởi hành :</b><br> <i class="fa fa-location-arrow"></i> {{$info->tour->start_address}}</p>
                                     <p><b>Ghi chú :</b><br> <i class="fa fa-sticky-note"></i> {{$info['note']}}</p>
-
                                 </address>
                             </div>
                             <div class="pull-right text-left col-md-4">
@@ -70,8 +72,20 @@
                                         <td class="text-center">1</td>
                                         <td>Người lớn</td>
                                         <td class="text-right">{{$log['tour']['customer']}} </td>
-                                        <td class="text-right"> {{$log['tour']['price_discount']}} </td>
-                                        <td class="text-right"> {{$log['tour']['customer'] * $log['tour']['price_discount']}} </td>
+                                        <td class="text-right">
+                                            @if($log['tour']['price_discount'] > 0)
+                                               {{ $log['tour']['price_discount']}}
+                                            @else
+                                                {{ $log['tour']['price']}}
+                                            @endif
+                                        </td>
+                                        <td class="text-right">
+                                            @if($log['tour']['price_discount'] > 0)
+                                                {{$log['tour']['customer'] * $log['tour']['price_discount']}}
+                                            @else
+                                                {{$log['tour']['customer'] * $log['tour']['price']}}
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-center">2</td>
@@ -113,7 +127,7 @@
                         <div class="clearfix"></div>
                         <hr>
                         <div class="text-right">
-                            <a href="{{route('admin.booking.edit',$info['id'])}}" class="btn btn-danger"> Sửa đơn hàng </a>
+                            <a href="{{route('admin.booking.change_status',[2,$info['id']])}}" class="btn btn-danger"> Hủy đơn hàng </a>
                         </div>
                     </div>
                 </div>

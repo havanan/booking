@@ -19,6 +19,6 @@ class Booking extends Model
     }
     public function tour()
     {
-        return $this->belongsTo(Tour::class,'tour_id')->select('name','id','avatar','status');
+        return $this->belongsTo(Tour::class,'tour_id')->select('name','id','avatar','status','start_address','location_id');
     }
 }

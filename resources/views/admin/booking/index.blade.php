@@ -44,17 +44,21 @@
                                        <td>
                                            <p>Giá: {{number_format($item->total_price)}} vnđ</p>
                                        </td>
-                                       <td title="{{$item->customer->name}}">
-                                           @if($item->customer->avatar != null)
-                                               <img class="thumb-sm" src="{{asset('/').'/'.$item->customer->avatar}}" >
+                                       <td>
+                                           @if($item->customer != null)
+                                               @if($item->customer->avatar != null)
+                                                   <img class="thumb-sm" src="{{asset('/').'/'.$item->customer->avatar}}" >
+                                               @endif
+                                               <strong>{{ $item->customer->name }}</strong>
                                            @endif
-                                           <strong>{{ $item->customer->name }}</strong>
                                        </td>
-                                       <td title="{{$item->author->name}}">
-                                           @if($item->author->avatar != null)
-                                               <img class="thumb-sm" src="{{asset('/').'/'.$item->customer->avatar}}" >
+                                       <td>
+                                           @if($item->author != null)
+                                               @if($item->author->avatar != null)
+                                                   <img class="thumb-sm" src="{{asset('/').'/'.$item->customer->avatar}}" >
+                                               @endif
+                                               <strong>{{ $item->author->name }}</strong>
                                            @endif
-                                           <strong>{{ $item->author->name }}</strong>
                                        </td>
                                        <td class="text-center">{{date('d/m/Y',strtotime($item->created_at))}}</td>
                                        <td class="text-center">
@@ -62,15 +66,19 @@
                                                <h4>
                                                    <span class="badge badge-success">Đã xác thực</span>
                                                </h4>
+                                           @elseif($item->status == 2)
+                                               <h4>
+                                                   <span class="badge badge-danger">Đã Hủy</span>
+                                               </h4>
                                            @else
                                                <h4>
-                                                   <span class="badge badge-danger">Chưa xác thực</span>
+                                                   <span class="badge badge-warning">Chưa xác thực</span>
                                                </h4>
                                            @endif
                                        </td>
                                        <td class="text-center">
                                            <a href="{{route('admin.booking.show',$item['id'])}}" class="btn btn-info"><i class="icon-eye"></i></a>
-                                           <a href="{{route('admin.booking.edit',$item['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>
+                                           {{--<a href="{{route('admin.booking.edit',$item['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>--}}
                                            @if($item['status'] == 1)
                                                <a href="{{route('admin.booking.change_status',[0,$item['id']])}}" class="btn btn-danger" title="Hủy kích hoạt tour"><i class="ti-unlink"></i></a>
                                            @else

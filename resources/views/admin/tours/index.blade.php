@@ -10,9 +10,11 @@
         <div class="col-md-12">
            <div class="card">
                <div class="card-body">
-                    <div class="row">
-                        <a href="{{route('admin.tour.create')}}" class="btn btn-info"> <i class="fa fa-plus-circle"></i> Tạo mới</a>
-                    </div>
+                   @if(Auth::user()->role == 1)
+                       <div class="row">
+                           <a href="{{route('admin.tour.create')}}" class="btn btn-info"> <i class="fa fa-plus-circle"></i> Tạo mới</a>
+                       </div>
+                   @endif
                    @include('layouts.components.notification')
                    <div class="table-responsive m-t-40">
                        <table id="table-data" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -62,8 +64,11 @@
                                        <td class="text-center">
                                            <a href="{{route('admin.tour.show',$item['id'])}}" class="btn btn-info"><i class="icon-eye"></i></a>
                                            <a href="{{route('admin.tour.edit',$item['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>
-                                           <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
-                                           @include('admin.tours.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           @if(Auth::user()->role == 1)
+                                               <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$item->id}}"><i class="icon-trash"></i></button>
+                                               @include('admin.tours.delete_model',['title' =>$item->name,'id' => $item->id])
+                                           @endif
+
                                        </td>
                                    </tr>
                                @endforeach

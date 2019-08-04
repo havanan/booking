@@ -11,12 +11,15 @@
     <div class="form-material m-t-10">
         <div class="row">
             <div class="col-md-8 text-left pb-2">
+
                 <a href="{{route('admin.tour.index')}}" class="btn btn-secondary"><i class="icon-arrow-left-circle"></i></a>
-                <a href="{{route('admin.tour.create')}}" class="btn btn-info"><i class="icon-plus"></i></a>
                 <a href="{{route('admin.tour.edit',$info['id'])}}" class="btn btn-primary"><i class="icon-pencil"></i></a>
-                <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$info['id']}}"><i class="icon-trash"></i></button>
+                @if(Auth::user()->role == 1)
+                    <a href="{{route('admin.tour.create')}}" class="btn btn-info"><i class="icon-plus"></i></a>
+                    <button class="btn btn-danger"  data-toggle="modal" data-target="#responsive-modal-{{$info['id']}}"><i class="icon-trash"></i></button>
+                    @include('admin.tours.delete_model',['title' =>$info['name'],'id' => $info['id']])
+                @endif
             </div>
-            @include('admin.tours.delete_model',['title' =>$info['name'],'id' => $info['id']])
         </div>
         <div class="row">
             <div class="col-md-8">
@@ -112,7 +115,7 @@
                                         @foreach($services as $item)
                                             <strong>
                                                 @if(isset($services_seleced[$item->slug]))
-                                                    <i class="{{$item->icon}}"></i> {{$item->name}}
+                                                    <i class="fa {{$item->icon}}"></i> {{$item->name}}
                                                 @endif
                                             </strong>
                                         @endforeach

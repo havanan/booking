@@ -16,12 +16,18 @@
                                 </svg>
                             </div>
                             <div class=" text-center text-uppercase h4">
-                                Đặt Tour Thành Công
+                                @if($booking['status'] == 2)
+                                    Đặt Tour Thất Bại
+                                @else
+                                    Đặt Tour Thành Công
+                                @endif
                             </div>
                             <!-- /.title -->
                             <div class="text-center text-muted">
                                 @if($booking['status'] == 0)
                                     Đặt tour thành công, chúng tôi sẽ liên hệ xác nhận theo số điện thoại của bạn trong vài phút tới
+                                @elseif($booking['status'] == 2)
+                                    Tour của bạn đã bị hủy
                                 @else
                                     Cám ơn quý khách đã lựa chọn và sử dụng dịch vụ của chúng tôi
                                 @endif
@@ -93,7 +99,9 @@
                                 <!-- /.col-6 -->
                                 <div class="col-8">
                                     @if($booking['status'] == 0)
-                                        <span class="btn btn-danger">Chưa xác nhận</span>
+                                        <span class="btn btn-warning">Chưa xác nhận</span>
+                                    @elseif($booking['status'] == 2)
+                                            <span class="btn btn-danger">Đã hủy</span>
                                     @else
                                         <span class="btn btn-success">Đã xác nhận</span>
                                     @endif
